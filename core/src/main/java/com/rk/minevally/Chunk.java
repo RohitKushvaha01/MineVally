@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Chunk {
     static final int CHUNK_SIZE = 16; // Define your chunk size here
+    static final int CHUNK_HEIGHT = 64;
     private final boolean[][][] voxelData;
     private Mesh mesh;
 
@@ -34,7 +35,7 @@ public class Chunk {
         meshBuilder.begin(attributes, GL20.GL_TRIANGLES);
 
         for (int x = 0; x < CHUNK_SIZE; x++) {
-            for (int y = 0; y < CHUNK_SIZE; y++) {
+            for (int y = 0; y < CHUNK_HEIGHT; y++) {
                 for (int z = 0; z < CHUNK_SIZE; z++) {
                     if (voxelData[x][y][z]) {
                         Matrix4 transform = new Matrix4().setToTranslation(new Vector3(x, y, z));
@@ -52,7 +53,7 @@ public class Chunk {
                             meshBuilder.setVertexTransform(transform);
                             Block.addBottomFace(meshBuilder, atlas);
                         }
-                        if (y == CHUNK_SIZE - 1 || !voxelData[x][y + 1][z]) { // Top face
+                        if (y == CHUNK_HEIGHT - 1 || !voxelData[x][y + 1][z]) { // Top face
                             meshBuilder.setVertexTransform(transform);
                             Block.addTopFace(meshBuilder, atlas);
                         }

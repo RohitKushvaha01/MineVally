@@ -1,5 +1,6 @@
 package com.rk.minevally;
 
+import static com.rk.minevally.Chunk.CHUNK_HEIGHT;
 import static com.rk.minevally.Chunk.CHUNK_SIZE;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -44,19 +45,31 @@ public class Main extends ApplicationAdapter {
         }
 
 
-        //cubeMesh = Block.newBlock(atlas);
-
-        boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
-
+         // Height of the chunk
+        boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_HEIGHT][CHUNK_SIZE];
+        float waveFrequency = 0.1f;  // Controls the frequency of the sine wave
+        float amplitude = 10.0f;     // Controls the height variation of the sine wave
+        int baseHeight = 32;         // Base height to add to the sine wave, can be half of CHUNK_HEIGHT
 
         for (int x = 0; x < CHUNK_SIZE; x++) {
-            for (int y = 0; y < CHUNK_SIZE; y++) {
-                for (int z = 0; z < CHUNK_SIZE; z++) {
-                   // voxelData[x][y][z] = Math.random() > 0.5;
-                   voxelData[x][y][z] = true;
+            for (int z = 0; z < CHUNK_SIZE; z++) {
+
+                // Generate surface height using a sine wave function
+                double surfaceHeight = baseHeight + Math.sin(x * waveFrequency) * amplitude + Math.sin(z * waveFrequency) * amplitude;
+
+                // Convert the surface height to an integer and clamp it within the valid range
+                int terrainHeight = Math.min(Math.max((int) surfaceHeight, 0), CHUNK_HEIGHT - 1);
+
+                // Fill blocks below the surface to create solid terrain
+                for (int y = 0; y <= terrainHeight; y++) {
+                    voxelData[x][y][z] = true;
                 }
             }
         }
+
+
+
+
 
 
 
