@@ -50,6 +50,8 @@ public class Main extends ApplicationAdapter {
         float amplitude = 10.0f;     // Controls the height variation of the sine wave
         int baseHeight = 32;         // Base height to add to the sine wave, can be half of CHUNK_HEIGHT
 
+        float noiseScale = 0.01f;
+
         for (int chunkX = 0; chunkX < CHUNK_COUNT_X; chunkX++) {
             for (int chunkZ = 0; chunkZ < CHUNK_COUNT_Z; chunkZ++) {
                 boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_HEIGHT][CHUNK_SIZE];
@@ -60,11 +62,19 @@ public class Main extends ApplicationAdapter {
                         int globalZ = z + chunkZ * CHUNK_SIZE;
 
                         // Generate surface height using a sine wave function
-                        double surfaceHeight = baseHeight + Math.sin(globalX * waveFrequency) * amplitude
-                            + Math.sin(globalZ * waveFrequency) * amplitude;
+                       // double surfaceHeight = baseHeight + Math.sin(globalX * waveFrequency) * amplitude
+                         //   + Math.sin(globalZ * waveFrequency) * amplitude;
+
+                        // Convert the surface height to an integer and clamp it within the valid range
+                        //int terrainHeight = Math.min(Math.max((int) surfaceHeight, 0), CHUNK_HEIGHT - 1);
+
+
+                        double noiseValue = OpenSimplex2S.noise2(5836921, globalX*noiseScale, globalZ * noiseScale);
+                        double surfaceHeight = baseHeight + noiseValue * amplitude;
 
                         // Convert the surface height to an integer and clamp it within the valid range
                         int terrainHeight = Math.min(Math.max((int) surfaceHeight, 0), CHUNK_HEIGHT - 1);
+
 
                         // Fill blocks below the surface to create solid terrain
                         for (int y = 0; y <= terrainHeight; y++) {
