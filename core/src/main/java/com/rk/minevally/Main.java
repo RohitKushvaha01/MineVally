@@ -1,5 +1,7 @@
 package com.rk.minevally;
 
+import static com.rk.minevally.Chunk.CHUNK_SIZE;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -10,8 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -22,7 +22,8 @@ public class Main extends ApplicationAdapter {
     private PerspectiveCamera camera;
     private CameraInputController cameraController;
     private ShaderProgram shaderProgram;
-    private Mesh cubeMesh;
+    //private Mesh cubeMesh;
+    Chunk chunk;
     private TextureAtlas atlas;
     private Texture texture;
 
@@ -31,8 +32,6 @@ public class Main extends ApplicationAdapter {
         atlas = new TextureAtlas(Gdx.files.internal("atlas.atlas"));
         texture = atlas.getTextures().first(); // All regions share the same texture
 
-        TextureAtlas.AtlasRegion region1 = atlas.findRegion("1");
-        TextureAtlas.AtlasRegion region2 = atlas.findRegion("2");
         FileHandle vertexShaderFile = Gdx.files.internal("vert.glsl");
         FileHandle fragmentShaderFile = Gdx.files.internal("frag.glsl");
 
@@ -44,33 +43,24 @@ public class Main extends ApplicationAdapter {
             Gdx.app.error("ShaderProgram", "Compilation failed:\n" + shaderProgram.getLog());
         }
 
-        VertexAttributes attributes = new VertexAttributes(
-            VertexAttribute.Position(),
-            VertexAttribute.Normal(),
-            VertexAttribute.TexCoords(0)
-        );
 
-        MeshBuilder meshBuilder = new MeshBuilder();
-        meshBuilder.begin(attributes, GL20.GL_TRIANGLES);
-        // Front face
-        addFace(meshBuilder, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, region1);
+        //cubeMesh = Block.newBlock(atlas);
 
-// Back face
-        addFace(meshBuilder, 0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, region2);
+        boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
 
-// Left face
-        addFace(meshBuilder, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, region1);
 
-// Right face
-        addFace(meshBuilder, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, region2);
+        for (int x = 0; x < CHUNK_SIZE; x++) {
+            for (int y = 0; y < CHUNK_SIZE; y++) {
+                for (int z = 0; z < CHUNK_SIZE; z++) {
+                   // voxelData[x][y][z] = Math.random() > 0.5;
+                   voxelData[x][y][z] = true;
+                }
+            }
+        }
 
-// Top face
-        addFace(meshBuilder, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f, region1);
 
-// Bottom face
-        addFace(meshBuilder, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, region2);
 
-        cubeMesh = meshBuilder.end();
+        chunk = new Chunk(voxelData,atlas);
 
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(2f, 2f, 2f);
@@ -83,36 +73,6 @@ public class Main extends ApplicationAdapter {
         Gdx.input.setInputProcessor(cameraController);
     }
 
-    private void addFace(MeshBuilder meshBuilder, float x1, float y1, float z1,
-                         float x2, float y2, float z2,
-                         float x3, float y3, float z3,
-                         float x4, float y4, float z4,
-                         TextureAtlas.AtlasRegion region) {
-        float u1 = region.getU();
-        float v1 = region.getV();
-        float u2 = region.getU2();
-        float v2 = region.getV2();
-
-        meshBuilder.setUVRange(u1, v1, u2, v2);
-
-        // Calculate normal vector
-        float nx = (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1);
-        float ny = (z2-z1)*(x3-x1) - (x2-x1)*(z3-z1);
-        float nz = (x2-x1)*(y3-y1) - (y2-y1)*(x3-x1);
-        float length = (float) Math.sqrt(nx*nx + ny*ny + nz*nz);
-        nx /= length;
-        ny /= length;
-        nz /= length;
-
-        // Define vertices for the face
-        meshBuilder.rect(
-            x1, y1, z1,   // vertex 1
-            x2, y2, z2,   // vertex 2
-            x3, y3, z3,   // vertex 3
-            x4, y4, z4,   // vertex 4
-            nx, ny, nz    // Normal vector
-        );
-    }
 
 
 
@@ -129,7 +89,8 @@ public class Main extends ApplicationAdapter {
 
         texture.bind();
         shaderProgram.setUniformi("u_texture", 0);
-        cubeMesh.render(shaderProgram, GL20.GL_TRIANGLES);
+        //cubeMesh.render(shaderProgram, GL20.GL_TRIANGLES);
+        chunk.getMesh().render(shaderProgram,GL20.GL_TRIANGLES);
 
         cameraController.update();
     }
@@ -143,7 +104,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        cubeMesh.dispose();
+       // cubeMesh.dispose();
         shaderProgram.dispose();
         atlas.dispose();
     }
