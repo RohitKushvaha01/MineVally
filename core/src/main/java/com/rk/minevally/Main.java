@@ -10,23 +10,23 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttribute;
-import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Main extends ApplicationAdapter {
 
+    private static final int CHUNK_COUNT_X = 8; // Number of chunks in the X direction
+    private static final int CHUNK_COUNT_Z = 8; // Number of chunks in the Z direction
+
     private PerspectiveCamera camera;
     private CameraInputController cameraController;
     private ShaderProgram shaderProgram;
-    //private Mesh cubeMesh;
-    Chunk chunk;
     private TextureAtlas atlas;
     private Texture texture;
+    private Chunk[][] chunks; // 2D array to hold multiple chunks
 
     @Override
     public void create() {
@@ -44,36 +44,38 @@ public class Main extends ApplicationAdapter {
             Gdx.app.error("ShaderProgram", "Compilation failed:\n" + shaderProgram.getLog());
         }
 
+        chunks = new Chunk[CHUNK_COUNT_X][CHUNK_COUNT_Z]; // Initialize the chunk array
 
-         // Height of the chunk
-        boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_HEIGHT][CHUNK_SIZE];
         float waveFrequency = 0.1f;  // Controls the frequency of the sine wave
         float amplitude = 10.0f;     // Controls the height variation of the sine wave
         int baseHeight = 32;         // Base height to add to the sine wave, can be half of CHUNK_HEIGHT
 
-        for (int x = 0; x < CHUNK_SIZE; x++) {
-            for (int z = 0; z < CHUNK_SIZE; z++) {
+        for (int chunkX = 0; chunkX < CHUNK_COUNT_X; chunkX++) {
+            for (int chunkZ = 0; chunkZ < CHUNK_COUNT_Z; chunkZ++) {
+                boolean[][][] voxelData = new boolean[CHUNK_SIZE][CHUNK_HEIGHT][CHUNK_SIZE];
 
-                // Generate surface height using a sine wave function
-                double surfaceHeight = baseHeight + Math.sin(x * waveFrequency) * amplitude + Math.sin(z * waveFrequency) * amplitude;
+                for (int x = 0; x < CHUNK_SIZE; x++) {
+                    for (int z = 0; z < CHUNK_SIZE; z++) {
+                        int globalX = x + chunkX * CHUNK_SIZE;
+                        int globalZ = z + chunkZ * CHUNK_SIZE;
 
-                // Convert the surface height to an integer and clamp it within the valid range
-                int terrainHeight = Math.min(Math.max((int) surfaceHeight, 0), CHUNK_HEIGHT - 1);
+                        // Generate surface height using a sine wave function
+                        double surfaceHeight = baseHeight + Math.sin(globalX * waveFrequency) * amplitude
+                            + Math.sin(globalZ * waveFrequency) * amplitude;
 
-                // Fill blocks below the surface to create solid terrain
-                for (int y = 0; y <= terrainHeight; y++) {
-                    voxelData[x][y][z] = true;
+                        // Convert the surface height to an integer and clamp it within the valid range
+                        int terrainHeight = Math.min(Math.max((int) surfaceHeight, 0), CHUNK_HEIGHT - 1);
+
+                        // Fill blocks below the surface to create solid terrain
+                        for (int y = 0; y <= terrainHeight; y++) {
+                            voxelData[x][y][z] = true;
+                        }
+                    }
                 }
+
+                chunks[chunkX][chunkZ] = new Chunk(voxelData, atlas);
             }
         }
-
-
-
-
-
-
-
-        chunk = new Chunk(voxelData,atlas);
 
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(2f, 2f, 2f);
@@ -85,9 +87,6 @@ public class Main extends ApplicationAdapter {
         cameraController = new CameraInputController(camera);
         Gdx.input.setInputProcessor(cameraController);
     }
-
-
-
 
     @Override
     public void render() {
@@ -102,11 +101,24 @@ public class Main extends ApplicationAdapter {
 
         texture.bind();
         shaderProgram.setUniformi("u_texture", 0);
-        //cubeMesh.render(shaderProgram, GL20.GL_TRIANGLES);
-        chunk.getMesh().render(shaderProgram,GL20.GL_TRIANGLES);
+
+        for (int chunkX = 0; chunkX < CHUNK_COUNT_X; chunkX++) {
+            for (int chunkZ = 0; chunkZ < CHUNK_COUNT_Z; chunkZ++) {
+                // Calculate the world position for this chunk
+                float worldX = chunkX * CHUNK_SIZE;
+                float worldZ = chunkZ * CHUNK_SIZE;
+
+                // Set the model matrix to translate the chunk to its world position
+                shaderProgram.setUniformMatrix("u_modelTrans", new Matrix4().setToTranslation(worldX, 0, worldZ));
+
+                // Render the chunk
+                chunks[chunkX][chunkZ].getMesh().render(shaderProgram, GL20.GL_TRIANGLES);
+            }
+        }
 
         cameraController.update();
     }
+
 
     @Override
     public void resize(int width, int height) {
@@ -117,8 +129,13 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-       // cubeMesh.dispose();
         shaderProgram.dispose();
         atlas.dispose();
+        // Dispose all chunk meshes
+        for (int chunkX = 0; chunkX < CHUNK_COUNT_X; chunkX++) {
+            for (int chunkZ = 0; chunkZ < CHUNK_COUNT_Z; chunkZ++) {
+                chunks[chunkX][chunkZ].getMesh().dispose();
+            }
+        }
     }
 }
