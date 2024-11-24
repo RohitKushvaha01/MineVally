@@ -1,0 +1,3 @@
+/home/rohit/minevally/CMakeFiles/MineVally.dir
+/home/rohit/minevally/CMakeFiles/edit_cache.dir
+/home/rohit/minevally/CMakeFiles/rebuild_cache.dir

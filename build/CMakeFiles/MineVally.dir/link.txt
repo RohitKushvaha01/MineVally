@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/MineVally.dir/glad.c.o CMakeFiles/MineVally.dir/src/callbacks.cpp.o CMakeFiles/MineVally.dir/src/main.cpp.o CMakeFiles/MineVally.dir/src/shader.cpp.o -o MineVally   -L/usr/lib/gcc/x86_64-linux-gnu/12  /usr/local/lib/libglfw3.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/librt.a -lm -ldl 
