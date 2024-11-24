@@ -1,7 +1,7 @@
 #include "callbacks.h"
 #include "settings.hpp"
 #include <iostream>
-#include "camera.hpp"
+#include "camera.cpp"
 
 // Camera instance
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
@@ -33,4 +33,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     lastY = ypos;
 
     camera.ProcessMouseMovement(xOffset, yOffset);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
+    SCR_WIDTH = width;
+    SCR_HEIGHT = height;
 }

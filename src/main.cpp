@@ -7,7 +7,7 @@
 #include "settings.hpp"
 #include "shader.hpp"
 #include "callbacks.h"
-#include "camera.hpp"
+#include "camera.cpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

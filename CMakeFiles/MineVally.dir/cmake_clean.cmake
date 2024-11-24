@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MineVally.dir/glad.c.o.d"
   "CMakeFiles/MineVally.dir/src/callbacks.cpp.o"
   "CMakeFiles/MineVally.dir/src/callbacks.cpp.o.d"
+  "CMakeFiles/MineVally.dir/src/camera.cpp.o"
+  "CMakeFiles/MineVally.dir/src/camera.cpp.o.d"
   "CMakeFiles/MineVally.dir/src/main.cpp.o"
   "CMakeFiles/MineVally.dir/src/main.cpp.o.d"
   "CMakeFiles/MineVally.dir/src/settings.cpp.o"

@@ -1,13 +1,14 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+
 #include "settings.hpp"
 #include "shader.hpp"
 #include "callbacks.h"
-#include "camera.hpp"
+
 
 class Camera {
 public:

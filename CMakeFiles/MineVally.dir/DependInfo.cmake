@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/rohit/minevally/glad.c" "CMakeFiles/MineVally.dir/glad.c.o" "gcc" "CMakeFiles/MineVally.dir/glad.c.o.d"
   "/home/rohit/minevally/src/callbacks.cpp" "CMakeFiles/MineVally.dir/src/callbacks.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/callbacks.cpp.o.d"
+  "/home/rohit/minevally/src/camera.cpp" "CMakeFiles/MineVally.dir/src/camera.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/camera.cpp.o.d"
   "/home/rohit/minevally/src/main.cpp" "CMakeFiles/MineVally.dir/src/main.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/main.cpp.o.d"
   "/home/rohit/minevally/src/settings.cpp" "CMakeFiles/MineVally.dir/src/settings.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/settings.cpp.o.d"
   "/home/rohit/minevally/src/shader.cpp" "CMakeFiles/MineVally.dir/src/shader.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/shader.cpp.o.d"
