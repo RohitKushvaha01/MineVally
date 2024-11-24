@@ -18,7 +18,7 @@ CMakeFiles/MineVally.dir/src/callbacks.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/KHR/khrplatform.h \
- /home/rohit/minevally/src/settings.hpp /usr/include/c++/11/iostream \
+ /home/rohit/minevally/src/camera.hpp /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
@@ -147,8 +147,7 @@ CMakeFiles/MineVally.dir/src/callbacks.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc \
- /home/rohit/minevally/src/camera.cpp /usr/include/glm/glm.hpp \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/glm/glm.hpp \
  /usr/include/glm/detail/_fixes.hpp /usr/include/c++/11/cmath \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -340,4 +339,5 @@ CMakeFiles/MineVally.dir/src/callbacks.cpp.o: \
  /usr/include/glm/ext/vector_uint1.hpp \
  /usr/include/glm/ext/vector_uint1_sized.hpp /usr/include/c++/11/cstring \
  /usr/include/string.h /usr/include/strings.h \
- /usr/include/glm/gtc/type_ptr.inl /home/rohit/minevally/src/shader.hpp
+ /usr/include/glm/gtc/type_ptr.inl /home/rohit/minevally/src/settings.hpp \
+ /home/rohit/minevally/src/shader.hpp

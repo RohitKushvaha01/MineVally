@@ -1,10 +1,10 @@
 #include "callbacks.h"
 #include "settings.hpp"
 #include <iostream>
-#include "camera.cpp"
 
-// Camera instance
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+
+//Camera instance
+Camera camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 // Process keyboard input for camera movement
 void processInput(GLFWwindow* window, float deltaTime) {

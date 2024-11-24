@@ -97,24 +97,10 @@ CMakeFiles/MineVally.dir/src/callbacks.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MineVally.dir/src/callbacks.cpp.s"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rohit/minevally/src/callbacks.cpp -o CMakeFiles/MineVally.dir/src/callbacks.cpp.s
 
-CMakeFiles/MineVally.dir/src/camera.cpp.o: CMakeFiles/MineVally.dir/flags.make
-CMakeFiles/MineVally.dir/src/camera.cpp.o: src/camera.cpp
-CMakeFiles/MineVally.dir/src/camera.cpp.o: CMakeFiles/MineVally.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MineVally.dir/src/camera.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MineVally.dir/src/camera.cpp.o -MF CMakeFiles/MineVally.dir/src/camera.cpp.o.d -o CMakeFiles/MineVally.dir/src/camera.cpp.o -c /home/rohit/minevally/src/camera.cpp
-
-CMakeFiles/MineVally.dir/src/camera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MineVally.dir/src/camera.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rohit/minevally/src/camera.cpp > CMakeFiles/MineVally.dir/src/camera.cpp.i
-
-CMakeFiles/MineVally.dir/src/camera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MineVally.dir/src/camera.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rohit/minevally/src/camera.cpp -o CMakeFiles/MineVally.dir/src/camera.cpp.s
-
 CMakeFiles/MineVally.dir/src/main.cpp.o: CMakeFiles/MineVally.dir/flags.make
 CMakeFiles/MineVally.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/MineVally.dir/src/main.cpp.o: CMakeFiles/MineVally.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MineVally.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MineVally.dir/src/main.cpp.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MineVally.dir/src/main.cpp.o -MF CMakeFiles/MineVally.dir/src/main.cpp.o.d -o CMakeFiles/MineVally.dir/src/main.cpp.o -c /home/rohit/minevally/src/main.cpp
 
 CMakeFiles/MineVally.dir/src/main.cpp.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/MineVally.dir/src/main.cpp.s: cmake_force
 CMakeFiles/MineVally.dir/src/settings.cpp.o: CMakeFiles/MineVally.dir/flags.make
 CMakeFiles/MineVally.dir/src/settings.cpp.o: src/settings.cpp
 CMakeFiles/MineVally.dir/src/settings.cpp.o: CMakeFiles/MineVally.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MineVally.dir/src/settings.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MineVally.dir/src/settings.cpp.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MineVally.dir/src/settings.cpp.o -MF CMakeFiles/MineVally.dir/src/settings.cpp.o.d -o CMakeFiles/MineVally.dir/src/settings.cpp.o -c /home/rohit/minevally/src/settings.cpp
 
 CMakeFiles/MineVally.dir/src/settings.cpp.i: cmake_force
@@ -142,7 +128,7 @@ CMakeFiles/MineVally.dir/src/settings.cpp.s: cmake_force
 CMakeFiles/MineVally.dir/src/shader.cpp.o: CMakeFiles/MineVally.dir/flags.make
 CMakeFiles/MineVally.dir/src/shader.cpp.o: src/shader.cpp
 CMakeFiles/MineVally.dir/src/shader.cpp.o: CMakeFiles/MineVally.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MineVally.dir/src/shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MineVally.dir/src/shader.cpp.o"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MineVally.dir/src/shader.cpp.o -MF CMakeFiles/MineVally.dir/src/shader.cpp.o.d -o CMakeFiles/MineVally.dir/src/shader.cpp.o -c /home/rohit/minevally/src/shader.cpp
 
 CMakeFiles/MineVally.dir/src/shader.cpp.i: cmake_force
@@ -157,7 +143,6 @@ CMakeFiles/MineVally.dir/src/shader.cpp.s: cmake_force
 MineVally_OBJECTS = \
 "CMakeFiles/MineVally.dir/glad.c.o" \
 "CMakeFiles/MineVally.dir/src/callbacks.cpp.o" \
-"CMakeFiles/MineVally.dir/src/camera.cpp.o" \
 "CMakeFiles/MineVally.dir/src/main.cpp.o" \
 "CMakeFiles/MineVally.dir/src/settings.cpp.o" \
 "CMakeFiles/MineVally.dir/src/shader.cpp.o"
@@ -167,7 +152,6 @@ MineVally_EXTERNAL_OBJECTS =
 
 MineVally: CMakeFiles/MineVally.dir/glad.c.o
 MineVally: CMakeFiles/MineVally.dir/src/callbacks.cpp.o
-MineVally: CMakeFiles/MineVally.dir/src/camera.cpp.o
 MineVally: CMakeFiles/MineVally.dir/src/main.cpp.o
 MineVally: CMakeFiles/MineVally.dir/src/settings.cpp.o
 MineVally: CMakeFiles/MineVally.dir/src/shader.cpp.o
@@ -176,7 +160,7 @@ MineVally: /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 MineVally: /usr/lib/x86_64-linux-gnu/libGLX.so
 MineVally: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 MineVally: CMakeFiles/MineVally.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable MineVally"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable MineVally"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MineVally.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

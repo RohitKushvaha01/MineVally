@@ -7,10 +7,11 @@
 #include "settings.hpp"
 #include "shader.hpp"
 #include "callbacks.h"
-#include "camera.cpp"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "deps/stb_image.h"
+
+
 
 int main()
 {
@@ -163,6 +164,10 @@ int main()
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
+        glm::mat4 view = camera.GetViewMatrix();
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+
         // Process input
         processInput(window, deltaTime);
         glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
@@ -175,7 +180,7 @@ int main()
         glUseProgram(shaderProgram);
 
         glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
+        //glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
 
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));

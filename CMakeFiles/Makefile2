@@ -81,12 +81,12 @@ clean: CMakeFiles/MineVally.dir/clean
 CMakeFiles/MineVally.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target MineVally"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rohit/minevally/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target MineVally"
 .PHONY : CMakeFiles/MineVally.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MineVally.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rohit/minevally/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rohit/minevally/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/MineVally.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rohit/minevally/CMakeFiles 0
 .PHONY : CMakeFiles/MineVally.dir/rule

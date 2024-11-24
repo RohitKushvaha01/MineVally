@@ -342,8 +342,8 @@ CMakeFiles/MineVally.dir/src/main.cpp.o: \
  /usr/include/glm/gtc/type_ptr.inl /home/rohit/minevally/src/settings.hpp \
  /home/rohit/minevally/src/shader.hpp \
  /home/rohit/minevally/src/callbacks.h \
- /home/rohit/minevally/src/camera.cpp \
- /home/rohit/minevally/src/stb_image.h /usr/include/c++/11/stdlib.h \
+ /home/rohit/minevally/src/camera.hpp \
+ /home/rohit/minevally/src/deps/stb_image.h /usr/include/c++/11/stdlib.h \
  /usr/include/c++/11/math.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
