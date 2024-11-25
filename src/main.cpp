@@ -11,8 +11,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "deps/stb_image.h"
 
-
-
 int main()
 {
     // Initialize GLFW
@@ -159,36 +157,46 @@ int main()
 
     float lastFrame = 0.0f;
     glm::mat4 model = glm::mat4(1.0f);
+    // Before the render loop: Cache uniform locations and set static uniforms
+    int modelLoc = glGetUniformLocation(shaderProgram, "model");
+    int viewLoc = glGetUniformLocation(shaderProgram, "view");
+    int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+
+    // Static uniform: Set model matrix once since it doesn't change
+    glUseProgram(shaderProgram);
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+    // Set texture once if it doesn't change
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
+    
     while (!glfwWindowShouldClose(window))
     {
+        // Frame time calculation
         float currentFrame = glfwGetTime();
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        glm::mat4 view = camera.GetViewMatrix();
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
-
-
         // Process input
         processInput(window, deltaTime);
-        glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
 
+        // Clear buffers
+        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        glUseProgram(shaderProgram);
+        // Update view and projection matrices
+        glm::mat4 view = camera.GetViewMatrix();
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
+        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
+        // Render the cube
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+        // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

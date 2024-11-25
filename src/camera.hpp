@@ -7,9 +7,8 @@
 #include "shader.hpp"
 #include "callbacks.h"
 
-
-
-class Camera {
+class Camera
+{
 public:
     glm::vec3 position;
     glm::vec3 front;
@@ -22,7 +21,8 @@ public:
     float zoom;
 
     Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-        : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(2.5f), mouseSensitivity(0.1f), zoom(45.0f) {
+        : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(2.5f), mouseSensitivity(0.1f), zoom(45.0f)
+    {
         this->position = position;
         this->worldUp = up;
         this->yaw = yaw;
@@ -30,11 +30,13 @@ public:
         this->updateCameraVectors();
     }
 
-    glm::mat4 GetViewMatrix() {
+    glm::mat4 GetViewMatrix()
+    {
         return glm::lookAt(position, position + front, up);
     }
 
-    void ProcessKeyboard(int direction, float deltaTime) {
+    void ProcessKeyboard(int direction, float deltaTime)
+    {
         float velocity = movementSpeed * deltaTime;
         if (direction == GLFW_KEY_W)
             position += front * velocity;
@@ -44,25 +46,38 @@ public:
             position -= right * velocity;
         if (direction == GLFW_KEY_D)
             position += right * velocity;
+        if (direction == GLFW_KEY_UP)
+        {
+            position += worldUp * velocity;
+        }
+        if (direction == GLFW_KEY_DOWN)
+        {
+            position += worldUp * -velocity;
+        }
     }
 
-    void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true) {
+    void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
+    {
         xOffset *= mouseSensitivity;
         yOffset *= mouseSensitivity;
 
-        yaw   += xOffset;
+        yaw += xOffset;
         pitch += yOffset;
 
-        if (constrainPitch) {
-            if (pitch > 89.0f) pitch = 89.0f;
-            if (pitch < -89.0f) pitch = -89.0f;
+        if (constrainPitch)
+        {
+            if (pitch > 89.0f)
+                pitch = 89.0f;
+            if (pitch < -89.0f)
+                pitch = -89.0f;
         }
 
         updateCameraVectors();
     }
 
 private:
-    void updateCameraVectors() {
+    void updateCameraVectors()
+    {
         glm::vec3 front;
         front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
         front.y = sin(glm::radians(pitch));
