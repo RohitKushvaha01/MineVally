@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MineVally.dir/src/settings.cpp.o.d"
   "CMakeFiles/MineVally.dir/src/shader.cpp.o"
   "CMakeFiles/MineVally.dir/src/shader.cpp.o.d"
+  "CMakeFiles/MineVally.dir/src/ui/ui.cpp.o"
+  "CMakeFiles/MineVally.dir/src/ui/ui.cpp.o.d"
   "MineVally"
   "MineVally.pdb"
 )

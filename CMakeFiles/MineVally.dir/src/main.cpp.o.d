@@ -349,7 +349,4 @@ CMakeFiles/MineVally.dir/src/main.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
- /home/rohit/minevally/src/deps/imgui-1.91.5/backends/imgui_impl_glfw.h \
- /home/rohit/minevally/src/deps/imgui-1.91.5/imgui.h \
- /home/rohit/minevally/src/deps/imgui-1.91.5/imconfig.h \
- /home/rohit/minevally/src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.h
+ /home/rohit/minevally/src/ui/ui.hpp

@@ -406,6 +406,30 @@ src/shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
+src/ui/ui.o: src/ui/ui.cpp.o
+.PHONY : src/ui/ui.o
+
+# target to build an object file
+src/ui/ui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/src/ui/ui.cpp.o
+.PHONY : src/ui/ui.cpp.o
+
+src/ui/ui.i: src/ui/ui.cpp.i
+.PHONY : src/ui/ui.i
+
+# target to preprocess a source file
+src/ui/ui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/src/ui/ui.cpp.i
+.PHONY : src/ui/ui.cpp.i
+
+src/ui/ui.s: src/ui/ui.cpp.s
+.PHONY : src/ui/ui.s
+
+# target to generate assembly for a file
+src/ui/ui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/src/ui/ui.cpp.s
+.PHONY : src/ui/ui.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -449,6 +473,9 @@ help:
 	@echo "... src/shader.o"
 	@echo "... src/shader.i"
 	@echo "... src/shader.s"
+	@echo "... src/ui/ui.o"
+	@echo "... src/ui/ui.i"
+	@echo "... src/ui/ui.s"
 .PHONY : help
 
 

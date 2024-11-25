@@ -28,6 +28,8 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 file(GLOB SOURCES 
     ${CMAKE_SOURCE_DIR}/src/*.cpp
     ${CMAKE_SOURCE_DIR}/src/*.c
+    ${CMAKE_SOURCE_DIR}/src/ui/*.c
+    ${CMAKE_SOURCE_DIR}/src/ui/*.cpp
     ${CMAKE_SOURCE_DIR}/glad.c
 )
 

@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/rohit/minevally/src/main.cpp" "CMakeFiles/MineVally.dir/src/main.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/main.cpp.o.d"
   "/home/rohit/minevally/src/settings.cpp" "CMakeFiles/MineVally.dir/src/settings.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/settings.cpp.o.d"
   "/home/rohit/minevally/src/shader.cpp" "CMakeFiles/MineVally.dir/src/shader.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/shader.cpp.o.d"
+  "/home/rohit/minevally/src/ui/ui.cpp" "CMakeFiles/MineVally.dir/src/ui/ui.cpp.o" "gcc" "CMakeFiles/MineVally.dir/src/ui/ui.cpp.o.d"
   )
 
 # Targets to which this target links.

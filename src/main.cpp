@@ -10,9 +10,8 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "deps/stb_image.h"
-#include "deps/imgui-1.91.5/backends/imgui_impl_glfw.h"
-#include "deps/imgui-1.91.5/backends/imgui_impl_opengl3.h"
-#include "deps/imgui-1.91.5/imgui.h"
+#include "ui/ui.hpp"
+
 
 int main()
 {
@@ -176,16 +175,12 @@ int main()
 
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
 
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
-    (void)io;
-    ImGui::StyleColorsDark(); // or ImGui::StyleColorsClassic() or ImGui::StyleColorsLight()
+    //init ui
+    initUi(window);
 
-    // Initialize ImGui for GLFW and OpenGL
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 330");
-
+    //disable v-sync
+    glfwSwapInterval(0);
+    
     GLenum err = glGetError();
     if (err != GL_NO_ERROR)
     {
@@ -198,8 +193,6 @@ int main()
         float currentFrame = glfwGetTime();
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-
-        
 
         // Process input
         processInput(window, deltaTime);
@@ -219,28 +212,16 @@ int main()
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGui::Begin("Hello, ImGui!"); // Start a new ImGui window
-        ImGui::Text("This is some text in ImGui!");
-        if (ImGui::Button("Click Me"))
-        {
-            std::cout << "Button clicked!" << std::endl;
-        }
-        ImGui::End();
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        //render ui
+        renderUi();
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
+    //dispose ui
+    disposeUi();
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
