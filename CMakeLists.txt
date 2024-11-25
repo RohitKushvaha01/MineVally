@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find OpenGL
 find_package(OpenGL REQUIRED)
 
-# Include GLFW
+# Find GLFW
 find_package(glfw3 REQUIRED)
 
 # Include directories
@@ -31,8 +31,25 @@ file(GLOB SOURCES
     ${CMAKE_SOURCE_DIR}/glad.c
 )
 
+# ImGui setup
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/src/deps/imgui-1.91.5)
+
+set(IMGUI_SRC
+    ${IMGUI_DIR}/imgui.cpp
+    ${IMGUI_DIR}/imgui_draw.cpp
+    ${IMGUI_DIR}/imgui_widgets.cpp
+    ${IMGUI_DIR}/imgui_tables.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+)
+
+add_library(imgui STATIC ${IMGUI_SRC})
+
+# Include ImGui headers
+target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
+
 # Add the executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} OpenGL::GL glfw)
+target_link_libraries(${PROJECT_NAME} imgui OpenGL::GL glfw)

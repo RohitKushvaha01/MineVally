@@ -5,13 +5,13 @@
 # compile CXX with /bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/home/rohit/minevally/include
+C_INCLUDES = -I/home/rohit/minevally/include -I/home/rohit/minevally/src/deps/imgui-1.91.5 -I/home/rohit/minevally/src/deps/imgui-1.91.5/backends
 
 C_FLAGS = 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/rohit/minevally/include
+CXX_INCLUDES = -I/home/rohit/minevally/include -I/home/rohit/minevally/src/deps/imgui-1.91.5 -I/home/rohit/minevally/src/deps/imgui-1.91.5/backends
 
 CXX_FLAGS = -std=gnu++17
 

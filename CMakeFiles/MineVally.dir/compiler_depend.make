@@ -904,7 +904,11 @@ CMakeFiles/MineVally.dir/src/main.cpp.o: src/main.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
+  src/deps/imgui-1.91.5/backends/imgui_impl_glfw.h \
+  src/deps/imgui-1.91.5/imgui.h \
+  src/deps/imgui-1.91.5/imconfig.h \
+  src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.h
 
 CMakeFiles/MineVally.dir/src/settings.cpp.o: src/settings.cpp \
   /usr/include/stdc-predef.h \
@@ -1326,6 +1330,10 @@ CMakeFiles/MineVally.dir/src/shader.cpp.o: src/shader.cpp \
 
 src/shader.cpp:
 
+src/deps/imgui-1.91.5/imconfig.h:
+
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h:
@@ -1532,6 +1540,8 @@ src/settings.cpp:
 
 /usr/include/c++/11/ext/atomicity.h:
 
+src/deps/imgui-1.91.5/imgui.h:
+
 /usr/include/c++/11/bits/stl_pair.h:
 
 /usr/include/c++/11/ext/type_traits.h:
@@ -1643,6 +1653,8 @@ src/callbacks.cpp:
 /usr/include/glm/ext/vector_uint4.hpp:
 
 /usr/include/dlfcn.h:
+
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 

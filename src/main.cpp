@@ -10,6 +10,9 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "deps/stb_image.h"
+#include "deps/imgui-1.91.5/backends/imgui_impl_glfw.h"
+#include "deps/imgui-1.91.5/backends/imgui_impl_opengl3.h"
+#include "deps/imgui-1.91.5/imgui.h"
 
 int main()
 {
@@ -18,6 +21,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_SAMPLES, 4); // Request 4x MSAA
 
     // Create a GLFW window
     GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MineVally", NULL, NULL);
@@ -134,7 +138,7 @@ int main()
     // Load image
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true); // Flip image vertically
-    unsigned char *data = stbi_load("/home/rohit/minevally/texture.png", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("/home/rohit/minevally/texture.png", &width, &height, &nrChannels, 4);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -151,6 +155,7 @@ int main()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_MULTISAMPLE);
 
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // Hide the cursor
@@ -170,7 +175,23 @@ int main()
     glBindTexture(GL_TEXTURE_2D, texture);
 
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
-    
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
+    ImGui::StyleColorsDark(); // or ImGui::StyleColorsClassic() or ImGui::StyleColorsLight()
+
+    // Initialize ImGui for GLFW and OpenGL
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR)
+    {
+        std::cerr << "OpenGL error: " << err << std::endl;
+    }
+
     while (!glfwWindowShouldClose(window))
     {
         // Frame time calculation
@@ -178,11 +199,13 @@ int main()
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
+        
+
         // Process input
         processInput(window, deltaTime);
 
         // Clear buffers
-        
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Update view and projection matrices
@@ -196,10 +219,27 @@ int main()
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::Begin("Hello, ImGui!"); // Start a new ImGui window
+        ImGui::Text("This is some text in ImGui!");
+        if (ImGui::Button("Click Me"))
+        {
+            std::cout << "Button clicked!" << std::endl;
+        }
+        ImGui::End();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);

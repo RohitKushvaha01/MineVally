@@ -156,6 +156,7 @@ MineVally: CMakeFiles/MineVally.dir/src/main.cpp.o
 MineVally: CMakeFiles/MineVally.dir/src/settings.cpp.o
 MineVally: CMakeFiles/MineVally.dir/src/shader.cpp.o
 MineVally: CMakeFiles/MineVally.dir/build.make
+MineVally: libimgui.a
 MineVally: /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 MineVally: /usr/lib/x86_64-linux-gnu/libGLX.so
 MineVally: /usr/lib/x86_64-linux-gnu/libOpenGL.so

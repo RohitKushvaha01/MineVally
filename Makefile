@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named imgui
+
+# Build rule for target.
+imgui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui
+.PHONY : imgui
+
+# fast build rule for target.
+imgui/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
+.PHONY : imgui/fast
+
+#=============================================================================
 # Target rules for targets named MineVally
 
 # Build rule for target.
@@ -176,6 +189,150 @@ src/callbacks.s: src/callbacks.cpp.s
 src/callbacks.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MineVally.dir/build.make CMakeFiles/MineVally.dir/src/callbacks.cpp.s
 .PHONY : src/callbacks.cpp.s
+
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.o: src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.o
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.o
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.o
+
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.i: src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.i
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.i
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.i
+
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.s: src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.s
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.s
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_glfw.cpp.s
+
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.o: src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.o
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.o
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.o
+
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.i: src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.i
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.i
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.i
+
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.s: src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.s
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.s
+.PHONY : src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.cpp.s
+
+src/deps/imgui-1.91.5/imgui.o: src/deps/imgui-1.91.5/imgui.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/imgui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui.cpp.o
+
+src/deps/imgui-1.91.5/imgui.i: src/deps/imgui-1.91.5/imgui.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui.cpp.i
+
+src/deps/imgui-1.91.5/imgui.s: src/deps/imgui-1.91.5/imgui.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui.cpp.s
+
+src/deps/imgui-1.91.5/imgui_draw.o: src/deps/imgui-1.91.5/imgui_draw.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/imgui_draw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_draw.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.cpp.o
+
+src/deps/imgui-1.91.5/imgui_draw.i: src/deps/imgui-1.91.5/imgui_draw.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_draw.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.cpp.i
+
+src/deps/imgui-1.91.5/imgui_draw.s: src/deps/imgui-1.91.5/imgui_draw.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_draw.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_draw.cpp.s
+
+src/deps/imgui-1.91.5/imgui_tables.o: src/deps/imgui-1.91.5/imgui_tables.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/imgui_tables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_tables.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.cpp.o
+
+src/deps/imgui-1.91.5/imgui_tables.i: src/deps/imgui-1.91.5/imgui_tables.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_tables.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.cpp.i
+
+src/deps/imgui-1.91.5/imgui_tables.s: src/deps/imgui-1.91.5/imgui_tables.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_tables.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_tables.cpp.s
+
+src/deps/imgui-1.91.5/imgui_widgets.o: src/deps/imgui-1.91.5/imgui_widgets.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.o
+
+# target to build an object file
+src/deps/imgui-1.91.5/imgui_widgets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_widgets.cpp.o
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.cpp.o
+
+src/deps/imgui-1.91.5/imgui_widgets.i: src/deps/imgui-1.91.5/imgui_widgets.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.i
+
+# target to preprocess a source file
+src/deps/imgui-1.91.5/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_widgets.cpp.i
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.cpp.i
+
+src/deps/imgui-1.91.5/imgui_widgets.s: src/deps/imgui-1.91.5/imgui_widgets.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.s
+
+# target to generate assembly for a file
+src/deps/imgui-1.91.5/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/src/deps/imgui-1.91.5/imgui_widgets.cpp.s
+.PHONY : src/deps/imgui-1.91.5/imgui_widgets.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -258,12 +415,31 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MineVally"
+	@echo "... imgui"
 	@echo "... glad.o"
 	@echo "... glad.i"
 	@echo "... glad.s"
 	@echo "... src/callbacks.o"
 	@echo "... src/callbacks.i"
 	@echo "... src/callbacks.s"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_glfw.o"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_glfw.i"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_glfw.s"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.o"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.i"
+	@echo "... src/deps/imgui-1.91.5/backends/imgui_impl_opengl3.s"
+	@echo "... src/deps/imgui-1.91.5/imgui.o"
+	@echo "... src/deps/imgui-1.91.5/imgui.i"
+	@echo "... src/deps/imgui-1.91.5/imgui.s"
+	@echo "... src/deps/imgui-1.91.5/imgui_draw.o"
+	@echo "... src/deps/imgui-1.91.5/imgui_draw.i"
+	@echo "... src/deps/imgui-1.91.5/imgui_draw.s"
+	@echo "... src/deps/imgui-1.91.5/imgui_tables.o"
+	@echo "... src/deps/imgui-1.91.5/imgui_tables.i"
+	@echo "... src/deps/imgui-1.91.5/imgui_tables.s"
+	@echo "... src/deps/imgui-1.91.5/imgui_widgets.o"
+	@echo "... src/deps/imgui-1.91.5/imgui_widgets.i"
+	@echo "... src/deps/imgui-1.91.5/imgui_widgets.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
