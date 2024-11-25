@@ -3,6 +3,8 @@
 #include "../deps/imgui-1.91.5/imgui.h"
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include "../callbacks.h"
+
 
 void initUi(GLFWwindow *window)
 {
@@ -26,23 +28,10 @@ void initUi(GLFWwindow *window)
     ImGui_ImplOpenGL3_CreateFontsTexture();
 }
 
-float lastTime = 0.0f; // Last time the frame was rendered
-int frameCount = 0;    // Number of frames rendered
-int fps = 0;      // FPS value
 
 void renderUi()
 {
-    float currentTime = glfwGetTime(); // Get the current time
-    frameCount++;                      // Increment frame count
-
-    // Calculate FPS every second (or time period of your choice)
-    if (currentTime - lastTime >= 1.0f)
-    {
-        fps = frameCount / (currentTime - lastTime); // Calculate FPS
-        lastTime = currentTime;                      // Reset last time
-        frameCount = 0;                              // Reset frame count
-    }
-
+    
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -56,8 +45,10 @@ void renderUi()
 
     // Draw text
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always); // Position the text
-    ImGui::Begin("TextWindow", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove);
-    ImGui::Text("fps : %d",fps);
+    ImGui::Begin("TextWindow", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove);
+    int fps = ImGui::GetIO().Framerate;
+    ImGui::Text("FPS : %d",fps);
+    ImGui::Text("X : %.2f\nY : %.2f\nZ : %.2f", camera.position.x, camera.position.y, camera.position.z);
     ImGui::End();
 
     if (customFont)
