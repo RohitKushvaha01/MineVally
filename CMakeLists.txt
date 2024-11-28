@@ -27,6 +27,8 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # Source files
 file(GLOB SOURCES 
     ${CMAKE_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/deps/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/deps/*.c
     ${CMAKE_SOURCE_DIR}/src/*.c
     ${CMAKE_SOURCE_DIR}/src/ui/*.c
     ${CMAKE_SOURCE_DIR}/src/ui/*.cpp
