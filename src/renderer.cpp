@@ -17,17 +17,26 @@ Renderer::~Renderer() {
     glDeleteTextures(1, &texture);
 }
 
+int modelLoc;
+int viewLoc;
+int projectionLoc;
+glm::mat4 model;
+
 void Renderer::initialize() {
     // Create and configure shader program
-    shaderProgram = createShader();  // This comes from your shader.hpp
+    shaderProgram = createShader(); 
 
     // Generate buffers and vertex array object
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    // Set the clear color
+    
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
+    model = glm::mat4(1.0f);
+    modelLoc = glGetUniformLocation(shaderProgram, "model");
+    viewLoc = glGetUniformLocation(shaderProgram, "view");
+    projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 }
 
 void Renderer::setupBuffers(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) {
@@ -74,15 +83,10 @@ void Renderer::loadTexture(const char* path) {
     stbi_image_free(data);
 }
 
+
 void Renderer::render(const glm::mat4& view, const glm::mat4& projection) {
     glUseProgram(shaderProgram);
     
-    // Update uniforms
-    glm::mat4 model = glm::mat4(1.0f);
-    int modelLoc = glGetUniformLocation(shaderProgram, "model");
-    int viewLoc = glGetUniformLocation(shaderProgram, "view");
-    int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
-
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));

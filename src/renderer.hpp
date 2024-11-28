@@ -4,18 +4,23 @@
 #include <vector>
 #include "chunk.hpp"
 
-class Renderer {
+class Renderer
+{
 private:
     unsigned int VAO, VBO, EBO;
     unsigned int shaderProgram;
     unsigned int texture;
-    
+
 public:
     Renderer();
     ~Renderer();
-    
+
     void initialize();
-    void setupBuffers(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
-    void loadTexture(const char* path);
-    void render(const glm::mat4& view, const glm::mat4& projection);
+    void setupBuffers(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices);
+    void loadTexture(const char *path);
+    void render(const glm::mat4 &view, const glm::mat4 &projection);
+    int modelLoc;
+    int viewLoc;
+    int projectionLoc;
+    glm::mat4 model;
 };

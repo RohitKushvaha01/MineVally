@@ -21,7 +21,7 @@ public:
     float zoom;
 
     Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-        : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(5.5f), mouseSensitivity(0.1f), zoom(45.0f)
+        : front(glm::vec3(0.0f, 0.0f, -1.0f)), movementSpeed(10.5f), mouseSensitivity(0.1f), zoom(45.0f)
     {
         this->position = position;
         this->worldUp = up;

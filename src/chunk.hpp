@@ -17,10 +17,11 @@ private:
     int to1DIndex(int x, int y, int z);
     bool isFaceVisible(int x, int y, int z, int face);
 
+    
 public:
     Chunk();
     uint8_t getBlock(int x, int y, int z);
     void setBlock(int x, int y, int z, uint8_t value);
-    void initialize();
+    void initialize(int chunkX, int chunkZ);
     void generateMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
 };

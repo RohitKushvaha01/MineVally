@@ -34,9 +34,8 @@ bool Chunk::isFaceVisible(int x, int y, int z, int face) {
     }
 }
 
-void Chunk::initialize() {
+void Chunk::initialize(int chunkX, int chunkZ) {
     OpenSimplex2S simplex(912778);  // OpenSimplex2S noise generator with seed
-    std::memset(chunk, 0, sizeof(chunk));  // Clear the chunk, setting all to air
 
     for (int x = 0; x < CHUNK_SIZE; ++x) {
         for (int z = 0; z < CHUNK_SIZE; ++z) {
@@ -47,8 +46,10 @@ void Chunk::initialize() {
 
             // Combine multiple octaves of noise for a smoother result
             for (int i = 0; i < octaves; ++i) {
+                float worldX = (chunkX * CHUNK_SIZE) + x;
+                float worldZ = (chunkZ * CHUNK_SIZE) + z;
                 // Generate noise at increasing frequency and decreasing amplitude
-                total_noise += simplex.noise2(x * frequency, z * frequency) * amplitude;
+                total_noise += simplex.noise2(worldX * frequency, worldZ * frequency) * amplitude;
                 frequency *= 2.0;  // Increase frequency
                 amplitude *= 0.5;  // Decrease amplitude
             }

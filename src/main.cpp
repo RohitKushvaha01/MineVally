@@ -9,8 +9,10 @@
 #include "settings.hpp"
 #include "callbacks.h"
 #include "ui/ui.hpp"
+#include "world.hpp"
 
-int main() {
+int main()
+{
     // Initialize GLFW
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -18,15 +20,17 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MineVally", NULL, NULL);
-    if (window == NULL) {
+    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MineVally", NULL, NULL);
+    if (window == NULL)
+    {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
 
     glfwMakeContextCurrent(window);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
         std::cerr << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
@@ -37,33 +41,41 @@ int main() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
-    // Initialize components
-    Chunk chunk;
+    World world;
     Renderer renderer;
-    
-    chunk.initialize();
-    renderer.initialize();
 
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-    chunk.generateMesh(vertices, indices);
+
+    renderer.initialize();
     renderer.setupBuffers(vertices, indices);
     renderer.loadTexture("/home/rohit/minevally/texture.png");
+
+    // Add some chunks
+
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            world.addChunk(glm::vec3(i,0,j));
+        }
+    }
 
     // Enable OpenGL features
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_MULTISAMPLE);
-    
+
     float lastFrame = 0.0f;
     initUi(window);
 
-    //disable vsync
+    // disable vsync
     glfwSwapInterval(0);
 
     // Main render loop
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window))
+    {
         float currentFrame = glfwGetTime();
         float deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -72,13 +84,19 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glm::mat4 view = camera.GetViewMatrix();
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 
-                                              (float)SCR_WIDTH / SCR_HEIGHT, 
-                                              0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f),
+                                                (float)SCR_WIDTH / SCR_HEIGHT,
+                                                0.1f, 100.0f);
+
+        if (world.needsUpdate())
+        {
+            world.generateCombinedMesh(camera.GetViewMatrix());
+            renderer.setupBuffers(world.getVertices(), world.getIndices());
+        }
 
         renderer.render(view, projection);
         renderUi();
-        
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
