@@ -13,6 +13,43 @@
 #include "ui/ui.hpp"
 
 
+const int CHUNK_SIZE = 16;
+
+// Define a simple chunk: 1 for solid blocks, 0 for empty space
+int chunk[CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE];
+
+int to1DIndex(int x, int y, int z)
+{
+    return x + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
+}
+
+int getBlock(int x, int y, int z)
+{
+    return chunk[to1DIndex(x, y, z)];
+}
+
+void setBlock(int x, int y, int z, int value)
+{
+    chunk[to1DIndex(x, y, z)] = value;
+}
+
+
+// Initialize the chunk with some data (e.g., solid base layer)
+void initializeChunk()
+{
+   
+    for (int x = 0; x < CHUNK_SIZE; ++x)
+    {
+        for (int y = 0; y < CHUNK_SIZE; ++y)
+        {
+            for (int z = 0; z < CHUNK_SIZE; ++z)
+            {
+                setBlock(x, y, z, (y == 0) ? 1 : 0);
+            }
+        }
+    }
+}
+
 int main()
 {
     // Initialize GLFW
@@ -175,17 +212,19 @@ int main()
 
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
 
-    //init ui
+    // init ui
     initUi(window);
 
-    //disable v-sync
+    // disable v-sync
     glfwSwapInterval(0);
-    
+
     GLenum err = glGetError();
     if (err != GL_NO_ERROR)
     {
         std::cerr << "OpenGL error: " << err << std::endl;
     }
+
+    initializeChunk();
 
     while (!glfwWindowShouldClose(window))
     {
@@ -208,11 +247,30 @@ int main()
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-        // Render the cube
+        // Render the chunk
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-        //render ui
+        for (int x = 0; x < CHUNK_SIZE; ++x)
+        {
+            for (int y = 0; y < CHUNK_SIZE; ++y)
+            {
+                for (int z = 0; z < CHUNK_SIZE; ++z)
+                {
+                    if (getBlock(x,y,z) == 1) // Only render solid blocks
+                    {
+                        // Translate each block based on its position in the chunk
+                        glm::mat4 model = glm::mat4(1.0f);
+                        model = glm::translate(model, glm::vec3(x, y, z));
+                        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+                        // Draw the cube
+                        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+                    }
+                }
+            }
+        }
+
+        // render ui
         renderUi();
 
         // Swap buffers and poll events
@@ -220,7 +278,7 @@ int main()
         glfwPollEvents();
     }
 
-    //dispose ui
+    // dispose ui
     disposeUi();
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
