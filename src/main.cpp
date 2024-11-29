@@ -42,24 +42,6 @@ int main()
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
     World world;
-    Renderer renderer;
-
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-
-    renderer.initialize();
-    renderer.setupBuffers(vertices, indices);
-    renderer.loadTexture("/home/rohit/minevally/texture.png");
-
-    // Add some chunks
-
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            world.addChunk(glm::vec3(i,0,j));
-        }
-    }
 
     // Enable OpenGL features
     glEnable(GL_DEPTH_TEST);
@@ -88,13 +70,7 @@ int main()
                                                 (float)SCR_WIDTH / SCR_HEIGHT,
                                                 0.1f, 100.0f);
 
-        if (world.needsUpdate())
-        {
-            world.generateCombinedMesh(camera.GetViewMatrix());
-            renderer.setupBuffers(world.getVertices(), world.getIndices());
-        }
-
-        renderer.render(view, projection);
+        world.render(view,projection);
         renderUi();
 
         glfwSwapBuffers(window);

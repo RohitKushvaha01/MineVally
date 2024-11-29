@@ -1,23 +1,46 @@
 #include "world.hpp"
 #include <thread>
 #include <mutex>
+#include "renderer.hpp"
+#include "callbacks.h"
+Renderer renderer;
+std::vector<Vertex> vertices;
+std::vector<unsigned int> indices;
+World::World() : meshNeedsUpdate(true)
+{
+    renderer.initialize();
+    renderer.setupBuffers(vertices, indices);
+    renderer.loadTexture("/home/rohit/minevally/texture.png");
 
-World::World() : meshNeedsUpdate(true) {}
+    // Add some chunks
 
-void World::addChunk(const glm::ivec3& position) {
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            addChunk(glm::vec3(i, 0, j));
+        }
+    }
+}
+
+void World::addChunk(const glm::ivec3 &position)
+{
     Chunk chunk;
-    chunk.initialize(position.x,position.z);
+    chunk.initialize(position.x, position.z);
     chunks[position] = chunk;
     meshNeedsUpdate = true;
 }
 
-void World::removeChunk(const glm::ivec3& position) {
+void World::removeChunk(const glm::ivec3 &position)
+{
     chunks.erase(position);
     meshNeedsUpdate = true;
 }
 
-void World::generateCombinedMesh( const glm::mat4& viewProjection) {
-    if (!meshNeedsUpdate) return;
+void World::generateCombinedMesh(const glm::mat4 &viewProjection)
+{
+    if (!meshNeedsUpdate)
+        return;
 
     combinedVertices.clear();
     combinedIndices.clear();
@@ -28,10 +51,11 @@ void World::generateCombinedMesh( const glm::mat4& viewProjection) {
     combinedIndices.reserve(totalChunks * CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE * 36);
 
     // For each chunk
-    for (auto& [position, chunk] : chunks) {
+    for (auto &[position, chunk] : chunks)
+    {
         std::vector<Vertex> chunkVertices;
         std::vector<unsigned int> chunkIndices;
-        
+
         // Generate mesh for this chunk
         chunk.generateMesh(chunkVertices, chunkIndices);
 
@@ -39,19 +63,20 @@ void World::generateCombinedMesh( const glm::mat4& viewProjection) {
         glm::vec3 offset(
             position.x * CHUNK_SIZE,
             position.y * CHUNK_SIZE,
-            position.z * CHUNK_SIZE
-        );
+            position.z * CHUNK_SIZE);
 
         // Add vertices with offset
         size_t baseIndex = combinedVertices.size();
-        for (const auto& vertex : chunkVertices) {
+        for (const auto &vertex : chunkVertices)
+        {
             Vertex offsetVertex = vertex;
             offsetVertex.position += offset;
             combinedVertices.push_back(offsetVertex);
         }
 
         // Add indices with offset
-        for (unsigned int index : chunkIndices) {
+        for (unsigned int index : chunkIndices)
+        {
             combinedIndices.push_back(index + baseIndex);
         }
     }
@@ -59,8 +84,8 @@ void World::generateCombinedMesh( const glm::mat4& viewProjection) {
     meshNeedsUpdate = false;
 }
 
-
-bool World::isChunkInView(const glm::ivec3& chunkPos, const glm::mat4& viewProjection) {
+bool World::isChunkInView(const glm::ivec3 &chunkPos, const glm::mat4 &viewProjection)
+{
     // Create AABB for the chunk
     glm::vec3 minPoint = glm::vec3(chunkPos * CHUNK_SIZE);
     glm::vec3 maxPoint = minPoint + glm::vec3(CHUNK_SIZE);
@@ -69,28 +94,43 @@ bool World::isChunkInView(const glm::ivec3& chunkPos, const glm::mat4& viewProje
     glm::mat4 inverseViewProjection = glm::inverse(viewProjection);
     glm::vec4 planes[6];
 
-    planes[0] = inverseViewProjection * glm::vec4(1.0f, 0.0f, 0.0f, 0.0f); // Left
+    planes[0] = inverseViewProjection * glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);  // Left
     planes[1] = inverseViewProjection * glm::vec4(-1.0f, 0.0f, 0.0f, 0.0f); // Right
-    planes[2] = inverseViewProjection * glm::vec4(0.0f, 1.0f, 0.0f, 0.0f); // Bottom
+    planes[2] = inverseViewProjection * glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);  // Bottom
     planes[3] = inverseViewProjection * glm::vec4(0.0f, -1.0f, 0.0f, 0.0f); // Top
-    planes[4] = inverseViewProjection * glm::vec4(0.0f, 0.0f, 1.0f, 0.0f); // Near
+    planes[4] = inverseViewProjection * glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);  // Near
     planes[5] = inverseViewProjection * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f); // Far
 
     // Normalize the planes
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i)
+    {
         planes[i] = glm::normalize(planes[i]);
     }
 
     // Check if the chunk AABB intersects with the frustum
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i)
+    {
         glm::vec3 planeNormal = glm::vec3(planes[i]);
         float distance = glm::dot(planeNormal, glm::vec3(minPoint)) + planes[i].w;
 
-        if (distance > 0.0f) {
+        if (distance > 0.0f)
+        {
             // The chunk is outside of the frustum if any plane faces away from the chunk
             return false;
         }
     }
 
     return true;
+}
+
+void World::render(const glm::mat4 &view, const glm::mat4 &projection)
+{
+    if (needsUpdate())
+    {
+        generateCombinedMesh(camera.GetViewMatrix());
+        renderer.setupBuffers(getVertices(), getIndices());
+    }
+
+    renderer.render(view, projection);
+    
 }

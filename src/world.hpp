@@ -30,4 +30,5 @@ public:
     const std::vector<unsigned int>& getIndices() const { return combinedIndices; }
     bool needsUpdate() const { return meshNeedsUpdate; }
     void setNeedsUpdate() { meshNeedsUpdate = true; }
+    void render(const glm::mat4 &view, const glm::mat4 &projection);
 };

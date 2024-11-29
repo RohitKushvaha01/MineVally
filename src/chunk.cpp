@@ -25,7 +25,7 @@ void Chunk::setBlock(int x, int y, int z, uint8_t value) {
 bool Chunk::isFaceVisible(int x, int y, int z, int face) {
     switch (face) {
         case 0: return y >= CHUNK_SIZE - 1 || getBlock(x, y + 1, z) == 0;
-        case 1: return y <= 0 || getBlock(x, y - 1, z) == 0;
+        case 1: return y <= -1 && getBlock(x, y - 1, z) == 0;
         case 2: return z >= CHUNK_SIZE - 1 || getBlock(x, y, z + 1) == 0;
         case 3: return z <= 0 || getBlock(x, y, z - 1) == 0;
         case 4: return x <= 0 || getBlock(x - 1, y, z) == 0;
