@@ -6,10 +6,12 @@
 #include "deps/stb_image.h"
 #include <iostream>
 
-Renderer::Renderer() : VAO(0), VBO(0), EBO(0), shaderProgram(0), texture(0) {
+Renderer::Renderer() : VAO(0), VBO(0), EBO(0), shaderProgram(0), texture(0)
+{
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer()
+{
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
@@ -20,26 +22,28 @@ Renderer::~Renderer() {
 int modelLoc;
 int viewLoc;
 int projectionLoc;
-glm::mat4 model;
 
-void Renderer::initialize() {
+
+void Renderer::initialize()
+{
     // Create and configure shader program
-    shaderProgram = createShader(); 
+    shaderProgram = createShader();
 
     // Generate buffers and vertex array object
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
-    model = glm::mat4(1.0f);
     modelLoc = glGetUniformLocation(shaderProgram, "model");
     viewLoc = glGetUniformLocation(shaderProgram, "view");
     projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 }
 
-void Renderer::setupBuffers(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) {
+GLuint indexCount;
+
+void Renderer::setupBuffers(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices)
+{
     glBindVertexArray(VAO);
 
     // Set up vertex buffer
@@ -49,16 +53,22 @@ void Renderer::setupBuffers(const std::vector<Vertex>& vertices, const std::vect
     // Set up element buffer
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
-    // Set up vertex attributes
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+    indexCount = indices.size();    
+    // position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, position));
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+    //textCoord
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, texCoord));
     glEnableVertexAttribArray(1);
+
+    //ao
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, ao));
+    glEnableVertexAttribArray(2);
 }
 
-void Renderer::loadTexture(const char* path) {
+void Renderer::loadTexture(const char *path)
+{
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -71,23 +81,27 @@ void Renderer::loadTexture(const char* path) {
     // Load and generate the texture
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
-    unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 4);
-    
-    if (data) {
+    unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 4);
+
+    if (data)
+    {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
+    }
+    else
+    {
         std::cerr << "Failed to load texture" << std::endl;
     }
-    
+
     stbi_image_free(data);
 }
 
-
-void Renderer::render(const glm::mat4& view, const glm::mat4& projection) {
-    glUseProgram(shaderProgram);
+void Renderer::render(const glm::mat4 &view, const glm::mat4 &projection)
+{
     
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    glUseProgram(shaderProgram);
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));  // dynamic model matrix
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -96,8 +110,7 @@ void Renderer::render(const glm::mat4& view, const glm::mat4& projection) {
 
     // Render the mesh
     glBindVertexArray(VAO);
-    // We get the number of indices from the current bound EBO
-    GLint size = 0;
-    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_TRIANGLES, size / sizeof(unsigned int), GL_UNSIGNED_INT, 0);
+
+    // Draw with the correct index count
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 }

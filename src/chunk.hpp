@@ -8,6 +8,7 @@ const int CHUNK_SIZE = 16;
 struct Vertex {
     glm::vec3 position;
     glm::vec2 texCoord;
+    float ao;
 };
 
 class Chunk {
@@ -23,5 +24,7 @@ public:
     uint8_t getBlock(int x, int y, int z);
     void setBlock(int x, int y, int z, uint8_t value);
     void initialize(int chunkX, int chunkZ);
-    void generateMesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
+    bool hasBlock(int x, int y, int z);
+    float getVertexAO(int x, int y, int z, int face, int vert);
+    void generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices);
 };
