@@ -48,13 +48,11 @@ in float v_ao;  // Interpolated AO value
 uniform sampler2D texture1;
 
 void main() {
-    vec4 texColor = texture(texture1, TexCoord);
-    float ambientStrength = 0.5;
-    float aoFactor = ambientStrength + (1.0 - ambientStrength) * v_ao;
-    // Apply AO while preserving original color
+     vec4 texColor = texture(texture1, TexCoord);
+    float ambientStrength = 0.3;
+    // Only apply AO if v_ao is less than 1.0
+    float aoFactor = v_ao >= 1.0 ? 1.0 : mix(ambientStrength, 1.0, v_ao);
     FragColor = vec4(texColor.rgb * aoFactor, texColor.a);
-
-    
 }
 
 

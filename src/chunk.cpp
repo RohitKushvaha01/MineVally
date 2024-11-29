@@ -89,24 +89,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 0: // Top face (+Y)
             switch(vert) {
                 case 0: // Front-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x - 1, y, z - 1);
+                    side1 = hasBlock(x - 1, y + 1, z);
+                    side2 = hasBlock(x, y + 1, z - 1);
+                    corner = hasBlock(x - 1, y + 1, z - 1);
                     break;
                 case 1: // Front-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x + 1, y, z - 1);
+                    side1 = hasBlock(x + 1, y + 1, z);
+                    side2 = hasBlock(x, y + 1, z - 1);
+                    corner = hasBlock(x + 1, y + 1, z - 1);
                     break;
                 case 2: // Back-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x + 1, y, z + 1);
+                    side1 = hasBlock(x + 1, y + 1, z);
+                    side2 = hasBlock(x, y + 1, z + 1);
+                    corner = hasBlock(x + 1, y + 1, z + 1);
                     break;
                 case 3: // Back-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x - 1, y, z + 1);
+                    side1 = hasBlock(x - 1, y + 1, z);
+                    side2 = hasBlock(x, y + 1, z + 1);
+                    corner = hasBlock(x - 1, y + 1, z + 1);
                     break;
             }
             break;
@@ -114,24 +114,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 1: // Bottom face (-Y)
             switch(vert) {
                 case 0: // Front-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x - 1, y, z - 1);
+                    side1 = hasBlock(x - 1, y - 1, z);
+                    side2 = hasBlock(x, y - 1, z - 1);
+                    corner = hasBlock(x - 1, y - 1, z - 1);
                     break;
                 case 1: // Front-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x + 1, y, z - 1);
+                    side1 = hasBlock(x + 1, y - 1, z);
+                    side2 = hasBlock(x, y - 1, z - 1);
+                    corner = hasBlock(x + 1, y - 1, z - 1);
                     break;
                 case 2: // Back-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x + 1, y, z + 1);
+                    side1 = hasBlock(x + 1, y - 1, z);
+                    side2 = hasBlock(x, y - 1, z + 1);
+                    corner = hasBlock(x + 1, y - 1, z + 1);
                     break;
                 case 3: // Back-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x - 1, y, z + 1);
+                    side1 = hasBlock(x - 1, y - 1, z);
+                    side2 = hasBlock(x, y - 1, z + 1);
+                    corner = hasBlock(x - 1, y - 1, z + 1);
                     break;
             }
             break;
@@ -139,24 +139,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 2: // Front face (+Z)
             switch(vert) {
                 case 0: // Bottom-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y - 1, z);
-                    corner = hasBlock(x - 1, y - 1, z);
+                    side1 = hasBlock(x - 1, y, z + 1);
+                    side2 = hasBlock(x, y - 1, z + 1);
+                    corner = hasBlock(x - 1, y - 1, z + 1);
                     break;
                 case 1: // Bottom-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y - 1, z);
-                    corner = hasBlock(x + 1, y - 1, z);
+                    side1 = hasBlock(x + 1, y, z + 1);
+                    side2 = hasBlock(x, y - 1, z + 1);
+                    corner = hasBlock(x + 1, y - 1, z + 1);
                     break;
                 case 2: // Top-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y + 1, z);
-                    corner = hasBlock(x + 1, y + 1, z);
+                    side1 = hasBlock(x + 1, y, z + 1);
+                    side2 = hasBlock(x, y + 1, z + 1);
+                    corner = hasBlock(x + 1, y + 1, z + 1);
                     break;
                 case 3: // Top-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y + 1, z);
-                    corner = hasBlock(x - 1, y + 1, z);
+                    side1 = hasBlock(x - 1, y, z + 1);
+                    side2 = hasBlock(x, y + 1, z + 1);
+                    corner = hasBlock(x - 1, y + 1, z + 1);
                     break;
             }
             break;
@@ -164,24 +164,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 3: // Back face (-Z)
             switch(vert) {
                 case 0: // Bottom-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y - 1, z);
-                    corner = hasBlock(x - 1, y - 1, z);
+                    side1 = hasBlock(x - 1, y, z - 1);
+                    side2 = hasBlock(x, y - 1, z - 1);
+                    corner = hasBlock(x - 1, y - 1, z - 1);
                     break;
                 case 1: // Bottom-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y - 1, z);
-                    corner = hasBlock(x + 1, y - 1, z);
+                    side1 = hasBlock(x + 1, y, z - 1);
+                    side2 = hasBlock(x, y - 1, z - 1);
+                    corner = hasBlock(x + 1, y - 1, z - 1);
                     break;
                 case 2: // Top-Right
-                    side1 = hasBlock(x + 1, y, z);
-                    side2 = hasBlock(x, y + 1, z);
-                    corner = hasBlock(x + 1, y + 1, z);
+                    side1 = hasBlock(x + 1, y, z - 1);
+                    side2 = hasBlock(x, y + 1, z - 1);
+                    corner = hasBlock(x + 1, y + 1, z - 1);
                     break;
                 case 3: // Top-Left
-                    side1 = hasBlock(x - 1, y, z);
-                    side2 = hasBlock(x, y + 1, z);
-                    corner = hasBlock(x - 1, y + 1, z);
+                    side1 = hasBlock(x - 1, y, z - 1);
+                    side2 = hasBlock(x, y + 1, z - 1);
+                    corner = hasBlock(x - 1, y + 1, z - 1);
                     break;
             }
             break;
@@ -189,24 +189,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 4: // Left face (-X)
             switch(vert) {
                 case 0: // Bottom-Back
-                    side1 = hasBlock(x, y - 1, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x, y - 1, z - 1);
+                    side1 = hasBlock(x - 1, y - 1, z);
+                    side2 = hasBlock(x - 1, y, z - 1);
+                    corner = hasBlock(x - 1, y - 1, z - 1);
                     break;
                 case 1: // Bottom-Front
-                    side1 = hasBlock(x, y - 1, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x, y - 1, z + 1);
+                    side1 = hasBlock(x - 1, y - 1, z);
+                    side2 = hasBlock(x - 1, y, z + 1);
+                    corner = hasBlock(x - 1, y - 1, z + 1);
                     break;
                 case 2: // Top-Front
-                    side1 = hasBlock(x, y + 1, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x, y + 1, z + 1);
+                    side1 = hasBlock(x - 1, y + 1, z);
+                    side2 = hasBlock(x - 1, y, z + 1);
+                    corner = hasBlock(x - 1, y + 1, z + 1);
                     break;
                 case 3: // Top-Back
-                    side1 = hasBlock(x, y + 1, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x, y + 1, z - 1);
+                    side1 = hasBlock(x - 1, y + 1, z);
+                    side2 = hasBlock(x - 1, y, z - 1);
+                    corner = hasBlock(x - 1, y + 1, z - 1);
                     break;
             }
             break;
@@ -214,24 +214,24 @@ float Chunk::getVertexAO(int x, int y, int z, int face, int vert) {
         case 5: // Right face (+X)
             switch(vert) {
                 case 0: // Bottom-Back
-                    side1 = hasBlock(x, y - 1, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x, y - 1, z - 1);
+                    side1 = hasBlock(x + 1, y - 1, z);
+                    side2 = hasBlock(x + 1, y, z - 1);
+                    corner = hasBlock(x + 1, y - 1, z - 1);
                     break;
                 case 1: // Bottom-Front
-                    side1 = hasBlock(x, y - 1, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x, y - 1, z + 1);
+                    side1 = hasBlock(x + 1, y - 1, z);
+                    side2 = hasBlock(x + 1, y, z + 1);
+                    corner = hasBlock(x + 1, y - 1, z + 1);
                     break;
                 case 2: // Top-Front
-                    side1 = hasBlock(x, y + 1, z);
-                    side2 = hasBlock(x, y, z + 1);
-                    corner = hasBlock(x, y + 1, z + 1);
+                    side1 = hasBlock(x + 1, y + 1, z);
+                    side2 = hasBlock(x + 1, y, z + 1);
+                    corner = hasBlock(x + 1, y + 1, z + 1);
                     break;
                 case 3: // Top-Back
-                    side1 = hasBlock(x, y + 1, z);
-                    side2 = hasBlock(x, y, z - 1);
-                    corner = hasBlock(x, y + 1, z - 1);
+                    side1 = hasBlock(x + 1, y + 1, z);
+                    side2 = hasBlock(x + 1, y, z - 1);
+                    corner = hasBlock(x + 1, y + 1, z - 1);
                     break;
             }
             break;
