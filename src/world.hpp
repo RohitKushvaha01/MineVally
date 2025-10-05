@@ -1,7 +1,11 @@
 #pragma once
 #include "chunk.hpp"
 #include <unordered_map>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+
+
 
 
 // Hash function for glm::ivec3 to use in unordered_map
@@ -26,6 +30,12 @@ public:
     void removeChunk(const glm::ivec3& position);
     void generateCombinedMesh(const glm::mat4 &viewProjection);
     bool isChunkInView(const glm::ivec3 &chunkPos, const glm::mat4 &viewProjection);
+
+    void initialize(GLFWwindow *window);
+    void render(const glm::mat4 &projection);
+    void dispose();
+    
+
     const std::vector<Vertex> &getVertices() const { return combinedVertices; }
     const std::vector<unsigned int>& getIndices() const { return combinedIndices; }
     bool needsUpdate() const { return meshNeedsUpdate; }

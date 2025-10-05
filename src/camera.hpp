@@ -1,9 +1,10 @@
+#pragma once
 
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "settings.hpp"
+#include "global.hpp"
 #include "shader.hpp"
 #include "callbacks.h"
 
@@ -35,7 +36,7 @@ public:
         return glm::lookAt(position, position + front, up);
     }
 
-    void ProcessKeyboard(int direction, float deltaTime)
+    void moveCamera(int direction, float deltaTime)
     {
         float velocity = movementSpeed * deltaTime;
         if (direction == GLFW_KEY_W)
@@ -88,3 +89,5 @@ private:
         up = glm::normalize(glm::cross(right, front));
     }
 };
+
+extern Camera camera;

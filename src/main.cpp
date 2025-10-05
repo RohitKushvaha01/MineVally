@@ -6,7 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "chunk.hpp"
 #include "renderer.hpp"
-#include "settings.hpp"
+#include "global.hpp"
 #include "callbacks.h"
 #include "ui/ui.hpp"
 #include "world.hpp"
@@ -19,8 +19,10 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
+    //glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
     GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MineVally", NULL, NULL);
+    
     if (window == NULL)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -35,6 +37,12 @@ int main()
         return -1;
     }
 
+    glfwSwapInterval(0);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_MULTISAMPLE);
+
     // Set up window callbacks and settings
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
@@ -42,38 +50,11 @@ int main()
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
     World world;
-    Renderer renderer;
-
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-
-    renderer.initialize();
-    renderer.setupBuffers(vertices, indices);
-    renderer.loadTexture("/home/rohit/minevally/texture.png");
-
-    // Add some chunks
-
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            world.addChunk(glm::vec3(i,0,j));
-        }
-    }
-
-    // Enable OpenGL features
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_MULTISAMPLE);
+    
+    world.initialize(window);
 
     float lastFrame = 0.0f;
-    initUi(window);
 
-    // disable vsync
-    glfwSwapInterval(0);
-
-    // Main render loop
     while (!glfwWindowShouldClose(window))
     {
         float currentFrame = glfwGetTime();
@@ -83,25 +64,18 @@ int main()
         processInput(window, deltaTime);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 view = camera.GetViewMatrix();
+        //glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
                                                 (float)SCR_WIDTH / SCR_HEIGHT,
-                                                0.1f, 100.0f);
+                                                0.1f, 1000.0f);
 
-        if (world.needsUpdate())
-        {
-            world.generateCombinedMesh(camera.GetViewMatrix());
-            renderer.setupBuffers(world.getVertices(), world.getIndices());
-        }
-
-        renderer.render(view, projection);
-        renderUi();
-
+        world.render(projection);
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    disposeUi();
+    world.dispose();
     glfwTerminate();
     return 0;
 }

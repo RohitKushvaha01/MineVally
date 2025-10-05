@@ -1,13 +1,10 @@
 #include "callbacks.h"
-#include "settings.hpp"
+#include "global.hpp"
+#include "camera.hpp"
 #include <iostream>
 
-// Camera instance
-Camera camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
-// Cursor state
 bool isCursorVisible = false;
-// Key state for toggling
 bool toggleKeyPressed = false;
 
 // Process keyboard input for camera movement
@@ -19,27 +16,27 @@ void processInput(GLFWwindow *window, float deltaTime)
     }
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_W, deltaTime);
+        camera.moveCamera(GLFW_KEY_W, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_S, deltaTime);
+        camera.moveCamera(GLFW_KEY_S, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_A, deltaTime);
+        camera.moveCamera(GLFW_KEY_A, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_D, deltaTime);
+        camera.moveCamera(GLFW_KEY_D, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_UP, deltaTime);
+        camera.moveCamera(GLFW_KEY_UP, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        camera.ProcessKeyboard(GLFW_KEY_DOWN, deltaTime);
+        camera.moveCamera(GLFW_KEY_DOWN, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
     {

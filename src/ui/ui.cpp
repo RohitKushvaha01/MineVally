@@ -1,7 +1,9 @@
 #include "../deps/imgui-1.91.5/backends/imgui_impl_glfw.h"
 #include "../deps/imgui-1.91.5/backends/imgui_impl_opengl3.h"
 #include "../deps/imgui-1.91.5/imgui.h"
+#include <sys/resource.h>
 #include <iostream>
+#include <malloc.h>
 #include <GLFW/glfw3.h>
 #include "../callbacks.h"
 
@@ -19,7 +21,7 @@ void initUi(GLFWwindow *window)
     ImGui_ImplOpenGL3_Init("#version 330");
 
     // Replace "Roboto-Regular.ttf" with your font path and size
-    ImFont *customFont = io.Fonts->AddFontFromFileTTF("/home/rohit/minevally/font.ttf", 18.0f);
+    ImFont *customFont = io.Fonts->AddFontFromFileTTF("font.ttf", 18.0f);
     if (customFont == nullptr)
     {
         std::cerr << "Failed to load font!" << std::endl;
@@ -29,9 +31,14 @@ void initUi(GLFWwindow *window)
 }
 
 
+int getMemoryUsageMB() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    return static_cast<int>(usage.ru_maxrss / 1024); // Convert KB to MB and cast to int
+}
+
 void renderUi()
 {
-    
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -49,6 +56,9 @@ void renderUi()
     int fps = ImGui::GetIO().Framerate;
     ImGui::Text("FPS : %d",fps);
     ImGui::Text("X : %.2f\nY : %.2f\nZ : %.2f", camera.position.x, camera.position.y, camera.position.z);
+
+    ImGui::Text("RAM : %dMB",getMemoryUsageMB());
+    ImGui::Text("HEAP : %dMB",static_cast<int>(mallinfo2().uordblks / (1024.0 * 1024.0)));
     ImGui::End();
 
     if (customFont)

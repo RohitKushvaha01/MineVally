@@ -5,13 +5,17 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "deps/stb_image.h"
 #include <iostream>
+#include "ui/ui.hpp"
 
-Renderer::Renderer() : VAO(0), VBO(0), EBO(0), shaderProgram(0), texture(0)
-{
-}
 
-Renderer::~Renderer()
-{
+int modelLoc;
+int viewLoc;
+int projectionLoc;
+
+
+Renderer::Renderer() : VAO(0), VBO(0), EBO(0), shaderProgram(0), texture(0){}
+
+Renderer::~Renderer(){
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
@@ -19,29 +23,34 @@ Renderer::~Renderer()
     glDeleteTextures(1, &texture);
 }
 
-int modelLoc;
-int viewLoc;
-int projectionLoc;
+std::vector<Vertex> vertices;
+std::vector<unsigned int> indices;
 
 
-void Renderer::initialize()
+void Renderer::initialize(GLFWwindow *window)
 {
+
+    setupBuffers(vertices, indices);
+    loadTexture("texture.png");
+
     // Create and configure shader program
     shaderProgram = createShader();
 
-    // Generate buffers and vertex array object
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+            // Generate buffers and vertex array object
+            glGenVertexArrays(1, &VAO);
+            glGenBuffers(1, &VBO);
+            glGenBuffers(1, &EBO);
 
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
     modelLoc = glGetUniformLocation(shaderProgram, "model");
     viewLoc = glGetUniformLocation(shaderProgram, "view");
     projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+
+    initUi(window);
 }
 
-GLuint indexCount;
 
+GLuint indexCount;
 void Renderer::setupBuffers(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices)
 {
     glBindVertexArray(VAO);
@@ -113,4 +122,10 @@ void Renderer::render(const glm::mat4 &view, const glm::mat4 &projection)
 
     // Draw with the correct index count
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+
+    renderUi();
+}
+
+void Renderer::dispose(){
+    disposeUi();
 }

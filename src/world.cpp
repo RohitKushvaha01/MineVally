@@ -1,8 +1,46 @@
 #include "world.hpp"
 #include <thread>
 #include <mutex>
+#include "renderer.hpp"
+#include "camera.hpp"
 
 World::World() : meshNeedsUpdate(true) {}
+
+
+Renderer renderer;
+
+void World::initialize(GLFWwindow *window)
+{
+    
+    for (int i = 0; i < 1; i++)
+    {
+        for (int j = 0; j < 1; j++)
+        {
+            addChunk(glm::vec3(i,0,j));
+        }
+    }
+    renderer.initialize(window);
+}
+
+void World::render(const glm::mat4 &projection)
+{
+    if (needsUpdate())
+        {
+            generateCombinedMesh(camera.GetViewMatrix());
+            renderer.setupBuffers(getVertices(), getIndices());
+        }
+
+    glm::mat4 view = camera.GetViewMatrix();
+    renderer.render(view,projection);
+}
+
+void World::dispose()
+{
+    renderer.dispose();
+}
+
+
+
 
 void World::addChunk(const glm::ivec3& position) {
     Chunk chunk;
@@ -94,3 +132,4 @@ bool World::isChunkInView(const glm::ivec3& chunkPos, const glm::mat4& viewProje
 
     return true;
 }
+

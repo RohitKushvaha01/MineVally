@@ -10,15 +10,17 @@ private:
     unsigned int VAO, VBO, EBO;
     unsigned int shaderProgram;
     unsigned int texture;
+    void loadTexture(const char *path);
 
 public:
     Renderer();
     ~Renderer();
 
-    void initialize();
+    void initialize(GLFWwindow *window);
     void setupBuffers(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices);
-    void loadTexture(const char *path);
     void render(const glm::mat4 &view, const glm::mat4 &projection);
+    void dispose();
+    
     int modelLoc;
     int viewLoc;
     int projectionLoc;
