@@ -190,13 +190,13 @@ void World::chunkManagerLoop() {
                     addChunk(pos);
                     chunksUpdated = true;
                     // Small delay to prevent overwhelming the system
-                    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 }
             }
         }
         
         // Check every 100ms for changes
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
     
     printf("Chunk manager thread stopped\n");
@@ -335,9 +335,9 @@ void World::initialize(GLFWwindow *window) {
     });
     
     // Wait for initial load to complete
-    while (!initialLoadComplete.load() && !isShuttingDown.load()) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
+    //while (!initialLoadComplete.load() && !isShuttingDown.load()) {
+        //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    //}
     
     printf("World initialized with dynamic chunk loading\n");
 }
@@ -364,7 +364,7 @@ void World::dispose() {
     }
     
     // Give detached threads time to finish
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(200));
     
     // Clean up pending chunks
     {
