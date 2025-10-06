@@ -10,6 +10,7 @@
 #include <thread>
 #include <queue>
 #include <unordered_set>
+#include <condition_variable>
 
 // Forward declarations
 struct ChunkMeshData;
@@ -39,6 +40,9 @@ private:
     static int renderDistance;
     static std::thread chunkManagerThread;
     static glm::ivec3 lastCameraChunk; 
+    static std::unordered_set<glm::ivec3, ivec3Hash, ivec3Equal> chunksBeingGenerated;
+    static std::condition_variable chunkManagerCV;
+    static std::mutex chunkManagerMutex;
     
     // Renderer instance
     static Renderer renderer;
@@ -46,6 +50,7 @@ private:
     void generateChunkAsync(const glm::ivec3& pos);
     void processPendingChunks();
     void chunkManagerLoop();
+    static std::atomic<bool> initialLoadComplete;
 
     glm::ivec3 worldToChunkPos(const glm::vec3& worldPos);
     bool isChunkInRange(const glm::ivec3& chunkPos, const glm::ivec3& centerChunk);
