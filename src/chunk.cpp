@@ -34,41 +34,65 @@ bool Chunk::isFaceVisible(int x, int y, int z, int face) {
     }
 }
 
-void Chunk::initialize(int chunkX, int chunkZ) {
-    OpenSimplex2S simplex(912778);  // OpenSimplex2S noise generator with seed
+void Chunk::initialize(int chunkX, int chunkY, int chunkZ) {
+    OpenSimplex2S simplex(912778);  // Noise generator with seed
 
     for (int x = 0; x < CHUNK_SIZE; ++x) {
         for (int z = 0; z < CHUNK_SIZE; ++z) {
-            float total_noise = 0.0;
-            float frequency = 0.05;  // Low frequency for rolling hills
-            float amplitude = 1.3;   // Standard amplitude
-            int octaves = 2;  // Fewer octaves for smoother terrain
+            float total_noise = 0.0f;
+            float frequency = 0.01f;   // lower = smoother hills
+            float amplitude = 1.0f;
+            int octaves = 4;
 
-            // Combine multiple octaves of noise for a smoother result
-            for (int i = 0; i < octaves; ++i) {
-                float worldX = (chunkX * CHUNK_SIZE) + x;
-                float worldZ = (chunkZ * CHUNK_SIZE) + z;
-                // Generate noise at increasing frequency and decreasing amplitude
-                total_noise += simplex.noise2(worldX * frequency, worldZ * frequency) * amplitude;
-                frequency *= 2.0;  // Increase frequency
-                amplitude *= 0.5;  // Decrease amplitude
+            // World coordinates for x,z
+            float worldX = (chunkX * CHUNK_SIZE) + x;
+            float worldZ = (chunkZ * CHUNK_SIZE) + z;
+
+            // Fractal 2D noise → heightmap
+            for (int i = 0; i < octaves; i++) {
+                total_noise += simplex.noise2(
+                    worldX * frequency,
+                    worldZ * frequency
+                ) * amplitude;
+
+                frequency *= 2.0f;
+                amplitude *= 0.5f;
             }
 
-            // Normalize and scale the total noise value to get height
-            float normalized_noise = (total_noise + 1.0) / 2.0;  // Normalize to [0, 1]
-            float height = normalized_noise * (CHUNK_SIZE / 2.0) + (CHUNK_SIZE / 4.0);  // Adjust height range for rolling hills
+            // Normalize
+            float normalized = (total_noise + 1.0f) / 2.0f;
 
-            // Fill the chunk with blocks based on height
+            // Final surface height in world coords
+            float baseHeight = 64.0f;              // "sea level"
+            float hillHeight = 48.0f;              // max additional height from noise
+            int surfaceHeight = (int)(baseHeight + normalized * hillHeight);
+
+            // Now fill the current chunk
             for (int y = 0; y < CHUNK_SIZE; ++y) {
-                if (y < height) {
-                    setBlock(x, y, z, 1);  // Solid block below the height (terrain)
+                int worldY = (chunkY * CHUNK_SIZE) + y;
+
+                if (worldY <= surfaceHeight) {
+                    // Optionally add 3D noise to carve caves inside solid areas
+                    float caveNoise = simplex.noise3_Classic(
+                        worldX * 0.05f,
+                        worldY * 0.05f,
+                        worldZ * 0.05f
+                    );
+
+                    if (caveNoise > 0.3f) {
+                        setBlock(x, y, z, 1); // solid block
+                    } else {
+                        setBlock(x, y, z, 0); // cave air
+                    }
                 } else {
-                    setBlock(x, y, z, 0);  // Air block above the height (sky)
+                    setBlock(x, y, z, 0); // above surface → air
                 }
             }
         }
     }
 }
+
+
 
 bool Chunk::hasBlock(int x, int y, int z) {
     return getBlock(x, y, z) != 0;

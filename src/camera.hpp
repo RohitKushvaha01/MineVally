@@ -55,6 +55,7 @@ public:
         {
             position += worldUp * -velocity;
         }
+        
     }
 
     void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)

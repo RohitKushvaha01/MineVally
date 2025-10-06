@@ -23,8 +23,10 @@ public:
     Chunk();
     uint8_t getBlock(int x, int y, int z);
     void setBlock(int x, int y, int z, uint8_t value);
-    void initialize(int chunkX, int chunkZ);
+    void initialize(int chunkX, int chunkY,int chunkZ);
     bool hasBlock(int x, int y, int z);
     float getVertexAO(int x, int y, int z, int face, int vert);
     void generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices);
+    size_t meshIndex = SIZE_MAX; // SIZE_MAX indicates no mesh assigned
+    bool hasMesh() const { return meshIndex != SIZE_MAX; }
 };

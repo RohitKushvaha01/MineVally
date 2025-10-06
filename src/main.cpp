@@ -77,5 +77,6 @@ int main()
 
     world.dispose();
     glfwTerminate();
+    glFinish();
     return 0;
 }

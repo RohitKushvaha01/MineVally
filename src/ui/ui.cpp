@@ -7,6 +7,10 @@
 #include <GLFW/glfw3.h>
 #include "../callbacks.h"
 
+#include <fstream>
+#include <string>
+#include <sstream>
+
 
 void initUi(GLFWwindow *window)
 {
@@ -30,13 +34,7 @@ void initUi(GLFWwindow *window)
     ImGui_ImplOpenGL3_CreateFontsTexture();
 }
 
-
-int getMemoryUsageMB() {
-    struct rusage usage;
-    getrusage(RUSAGE_SELF, &usage);
-    return static_cast<int>(usage.ru_maxrss / 1024); // Convert KB to MB and cast to int
-}
-
+ 
 void renderUi()
 {
     ImGui_ImplOpenGL3_NewFrame();
@@ -56,8 +54,6 @@ void renderUi()
     int fps = ImGui::GetIO().Framerate;
     ImGui::Text("FPS : %d",fps);
     ImGui::Text("X : %.2f\nY : %.2f\nZ : %.2f", camera.position.x, camera.position.y, camera.position.z);
-
-    ImGui::Text("RAM : %dMB",getMemoryUsageMB());
     ImGui::Text("HEAP : %dMB",static_cast<int>(mallinfo2().uordblks / (1024.0 * 1024.0)));
     ImGui::End();
 
@@ -72,6 +68,7 @@ void renderUi()
 
 void disposeUi()
 {
+    if (ImGui::GetCurrentContext() == nullptr) return;
     // Shutdown OpenGL and GLFW implementations for ImGui
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
