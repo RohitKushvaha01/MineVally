@@ -19,7 +19,8 @@ jobs:
         sudo apt-get install -y \
           libgl1-mesa-dev \
           xorg-dev \
-          libglfw3-dev
+          libglfw3-dev \
+          libglm-dev
 
     - name: Configure CMake
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
