@@ -8,13 +8,27 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: cmake
-      run: cmake ./
-    - name: make
-      run: make
-      
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libgl1-mesa-dev \
+          xorg-dev \
+          libglfw3-dev
+
+    - name: Configure CMake
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build -- -j$(nproc)
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MineVally-binary
+        path: build/MineVally
