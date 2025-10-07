@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C/C++ Multi-Arch Build
 
 on:
   push:
@@ -10,26 +10,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64,x86]
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install dependencies
+    - name: Set up QEMU for cross-arch builds
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: all
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build in container for ${{ matrix.arch }}
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          libgl1-mesa-dev \
-          xorg-dev \
-          libglfw3-dev \
-          libglm-dev
-
-    - name: Configure CMake
-      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-
-    - name: Build
-      run: cmake --build build -- -j$(nproc)
+        docker run --rm -v $PWD:/src -w /src \
+          --platform linux/${{ matrix.arch }} \
+          ubuntu:24.04 bash -c "
+            apt-get update &&
+            apt-get install -y cmake g++ make libgl1-mesa-dev xorg-dev libglfw3-dev libglm-dev &&
+            cmake -S . -B build -DCMAKE_BUILD_TYPE=Release &&
+            cmake --build build -- -j$(nproc)
+          "
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: MineVally-binary
+        name: MineVally-linux-${{ matrix.arch }}
         path: build/MineVally
