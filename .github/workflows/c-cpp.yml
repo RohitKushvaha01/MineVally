@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        arch: [x86_64, aarch64,x86]
+        arch: [x86_64, aarch64, x86]
 
     steps:
     - uses: actions/checkout@v4
@@ -27,13 +27,22 @@ jobs:
 
     - name: Build in container for ${{ matrix.arch }}
       run: |
+        # Map our architecture names to Docker platform names
+        case "${{ matrix.arch }}" in
+          x86_64) platform="linux/amd64" ;;
+          aarch64) platform="linux/arm64" ;;
+          x86) platform="linux/386" ;;
+        esac
+
+        echo "Building for $platform"
+
         docker run --rm -v $PWD:/src -w /src \
-          --platform linux/${{ matrix.arch }} \
-          ubuntu:24.04 bash -c "
+          --platform $platform \
+          debian:bookworm bash -c "
             apt-get update &&
             apt-get install -y cmake g++ make libgl1-mesa-dev xorg-dev libglfw3-dev libglm-dev &&
             cmake -S . -B build -DCMAKE_BUILD_TYPE=Release &&
-            cmake --build build -- -j$(nproc)
+            cmake --build build -- -j\$(nproc)
           "
 
     - name: Upload artifact
