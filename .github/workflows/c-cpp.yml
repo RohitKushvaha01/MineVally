@@ -45,8 +45,15 @@ jobs:
             cmake --build build -- -j\$(nproc)
           "
 
+    - name: Package build output
+      run: |
+        mkdir -p package
+        cp build/MineVally package/
+        cp texture.png font.ttf package/ || true  # copy if exists
+        ls -l package
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: MineVally-linux-${{ matrix.arch }}
-        path: build/MineVally
+        path: package
