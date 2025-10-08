@@ -27,17 +27,17 @@ find_package(glfw3 REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Source files
-file(GLOB SOURCES 
+file(GLOB_RECURSE SOURCES
     ${CMAKE_SOURCE_DIR}/src/*.cpp
-    ${CMAKE_SOURCE_DIR}/src/deps/*.cpp
-    ${CMAKE_SOURCE_DIR}/src/deps/*.c
     ${CMAKE_SOURCE_DIR}/src/*.c
     ${CMAKE_SOURCE_DIR}/src/ui/*.c
     ${CMAKE_SOURCE_DIR}/src/ui/*.cpp
 )
 
+
+
 # ImGui setup
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/src/deps/imgui-1.91.5)
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/deps/imgui-1.91.5)
 
 set(IMGUI_SRC
     ${IMGUI_DIR}/imgui.cpp

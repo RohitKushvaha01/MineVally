@@ -22,7 +22,7 @@ int main()
     //glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
     GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MineVally", NULL, NULL);
-    
+
     if (window == NULL)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -50,7 +50,7 @@ int main()
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
     World world;
-    
+
     world.initialize(window);
 
     float lastFrame = 0.0f;
@@ -70,7 +70,7 @@ int main()
                                                 0.1f, 1000.0f);
 
         world.render(projection);
-        
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

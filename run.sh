@@ -1,1 +1,2 @@
-cmake . && make && ./MineVally
+#!/bin/bash
+cmake . && make -j$(nproc) && ./MineVally

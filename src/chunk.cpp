@@ -1,6 +1,6 @@
 #include "chunk.hpp"
 #include <cstring>
-#include "deps/OpenSimplex2S.hpp"
+#include "OpenSimplex2S.hpp"
 
 Chunk::Chunk()
 {
@@ -56,7 +56,7 @@ void Chunk::initialize(int chunkX, int chunkY, int chunkZ)
         for (int z = 0; z < CHUNK_SIZE; ++z)
         {
             float total_noise = 0.0f;
-            float frequency = 0.01f; // lower = smoother hills
+            float frequency = 0.001f; // lower = smoother hills
             float amplitude = 1.0f;
             int octaves = 4;
 

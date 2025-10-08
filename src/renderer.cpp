@@ -3,7 +3,7 @@
 #include "shader.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "deps/stb_image.h"
+#include "stb_image.h"
 #include <iostream>
 #include "ui/ui.hpp"
 #include <algorithm>
@@ -24,10 +24,10 @@ Renderer::Renderer() : shaderProgram(0), texture(0) {}
 
 void Renderer::compactMeshes() {
     // Remove all deleted mesh entries to free memory
-    auto it = std::remove_if(meshes.begin(), meshes.end(), 
+    auto it = std::remove_if(meshes.begin(), meshes.end(),
         [](const Mesh& m) { return m.indexCount == 0; });
     meshes.erase(it, meshes.end());
-    
+
     // Force deallocation by shrinking capacity
     meshes.shrink_to_fit();
 }
@@ -38,7 +38,7 @@ void Renderer::initialize(GLFWwindow* window) {
         glDeleteProgram(shaderProgram);
         shaderProgram = 0;
     }
-    
+
     shaderProgram = createShader();
     loadTexture("texture.png");
 
@@ -58,7 +58,7 @@ void Renderer::loadTexture(const char *path)
         glDeleteTextures(1, &texture);
         texture = 0;
     }
-    
+
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -118,15 +118,15 @@ size_t Renderer::addMesh(const std::vector<Vertex>& vertices, const std::vector<
 
 void Renderer::removeMesh(size_t index) {
     if (index >= meshes.size()) return;
-    
+
     // Skip if already deleted
     if (meshes[index].indexCount == 0) return;
-    
+
     // Delete OpenGL resources
     glDeleteVertexArrays(1, &meshes[index].VAO);
     glDeleteBuffers(1, &meshes[index].VBO);
     glDeleteBuffers(1, &meshes[index].EBO);
-    
+
     // Mark as deleted by setting indexCount to 0
     meshes[index].indexCount = 0;
     meshes[index].VAO = 0;
@@ -173,7 +173,7 @@ void Renderer::dispose() {
         glDeleteProgram(shaderProgram);
         shaderProgram = 0;
     }
-    
+
     // Clean up texture
     if (texture != 0) {
         glDeleteTextures(1, &texture);

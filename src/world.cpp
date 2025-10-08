@@ -64,24 +64,22 @@ bool World::isChunkInRange(const glm::ivec3& chunkPos, const glm::ivec3& centerC
     int dx = chunkPos.x - centerChunk.x;
     int dy = chunkPos.y - centerChunk.y;
     int dz = chunkPos.z - centerChunk.z;
-    
-    // Use cylindrical distance (ignore Y for more natural loading)
-    int horizontalDistSq = dx * dx + dz * dz;
-    int verticalDist = std::abs(dy);
-    
-    return horizontalDistSq <= renderDistance * renderDistance && 
-           verticalDist <= renderDistance / 2;
+
+    // Use full 3D distance (include Y axis)
+    int distanceSq = dx * dx + dy * dy + dz * dz;
+
+    return distanceSq <= renderDistance * renderDistance;
 }
+
 
 // Get all chunks that should be loaded around a position
 std::vector<glm::ivec3> World::getChunksInRange(const glm::ivec3& centerChunk) {
     std::vector<glm::ivec3> result;
-    
-    int verticalRange = renderDistance / 2;
-    
-    for (int y = -verticalRange; y <= verticalRange; y++) {
+
+    for (int y = -renderDistance; y <= renderDistance; y++) {
         for (int x = -renderDistance; x <= renderDistance; x++) {
             for (int z = -renderDistance; z <= renderDistance; z++) {
+                // FIX: Include Y in the chunk position
                 glm::ivec3 chunkPos = centerChunk + glm::ivec3(x, y, z);
                 if (isChunkInRange(chunkPos, centerChunk)) {
                     result.push_back(chunkPos);
@@ -89,19 +87,19 @@ std::vector<glm::ivec3> World::getChunksInRange(const glm::ivec3& centerChunk) {
             }
         }
     }
-    
+
     // Sort by distance from center (closer chunks load first)
-    std::sort(result.begin(), result.end(), 
+    std::sort(result.begin(), result.end(),
         [centerChunk](const glm::ivec3& a, const glm::ivec3& b) {
-            int distA = (a.x - centerChunk.x) * (a.x - centerChunk.x) + 
+            int distA = (a.x - centerChunk.x) * (a.x - centerChunk.x) +
                        (a.z - centerChunk.z) * (a.z - centerChunk.z) +
                        (a.y - centerChunk.y) * (a.y - centerChunk.y);
-            int distB = (b.x - centerChunk.x) * (b.x - centerChunk.x) + 
+            int distB = (b.x - centerChunk.x) * (b.x - centerChunk.x) +
                        (b.z - centerChunk.z) * (b.z - centerChunk.z) +
                        (b.y - centerChunk.y) * (b.y - centerChunk.y);
             return distA < distB;
         });
-    
+
     return result;
 }
 
@@ -110,95 +108,92 @@ World::World(){}
 // Background thread that manages chunk loading/unloading
 void World::chunkManagerLoop() {
     printf("Chunk manager thread started\n");
-    
+
     // Initial load - ensure chunks around starting position
     {
         glm::vec3 cameraPos = camera.position;
         glm::ivec3 currentCameraChunk = worldToChunkPos(cameraPos);
         lastCameraChunk = currentCameraChunk;
-        
-        printf("Initial camera chunk: (%d, %d, %d)\n", 
+
+        printf("Initial camera chunk: (%d, %d, %d)\n",
                currentCameraChunk.x, currentCameraChunk.y, currentCameraChunk.z);
-        
+
         std::vector<glm::ivec3> desiredChunks = getChunksInRange(currentCameraChunk);
         for (const auto& pos : desiredChunks) {
             if (isShuttingDown.load()) break;
             addChunk(pos);
-            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
-        
+
         initialLoadComplete.store(true);
         printf("Initial chunk load complete (%zu chunks)\n", desiredChunks.size());
     }
-    
+
     while (!isShuttingDown.load()) {
         glm::vec3 cameraPos = camera.position;
         glm::ivec3 currentCameraChunk = worldToChunkPos(cameraPos);
-        
-        bool chunksUpdated = false;
-        
-        // Always check and ensure chunks are present, even if camera hasn't moved
-        {
-            std::vector<glm::ivec3> desiredChunks = getChunksInRange(currentCameraChunk);
-            std::unordered_set<glm::ivec3, ivec3Hash, ivec3Equal> desiredSet(
-                desiredChunks.begin(), desiredChunks.end());
-            
-            // Check if camera moved to new chunk
-            bool cameraMoved = (currentCameraChunk != lastCameraChunk);
-            if (cameraMoved) {
-                printf("Camera moved to chunk (%d, %d, %d)\n", 
-                       currentCameraChunk.x, currentCameraChunk.y, currentCameraChunk.z);
-                lastCameraChunk = currentCameraChunk;
-            }
-            
-            // Remove chunks that are too far (only if camera moved)
-            if (cameraMoved) {
-                std::vector<glm::ivec3> chunksToRemove;
-                {
-                    std::lock_guard<std::mutex> lock(chunksMutex);
-                    for (const auto& [pos, chunk] : chunks) {
-                        if (desiredSet.count(pos) == 0) {
-                            chunksToRemove.push_back(pos);
-                        }
+
+        // Check if camera moved to new chunk
+        bool cameraMoved = (currentCameraChunk != lastCameraChunk);
+        if (cameraMoved) {
+            printf("Camera moved to chunk (%d, %d, %d)\n",
+                   currentCameraChunk.x, currentCameraChunk.y, currentCameraChunk.z);
+            lastCameraChunk = currentCameraChunk;
+        }
+
+        // Get chunks that should be loaded
+        std::vector<glm::ivec3> desiredChunks = getChunksInRange(currentCameraChunk);
+        std::unordered_set<glm::ivec3, ivec3Hash, ivec3Equal> desiredSet(
+            desiredChunks.begin(), desiredChunks.end());
+
+        // Remove chunks that are too far
+        if (cameraMoved) {
+            std::vector<glm::ivec3> chunksToRemove;
+            {
+                std::lock_guard<std::mutex> lock(chunksMutex);
+                for (const auto& [pos, chunk] : chunks) {
+                    // FIX: Use proper 3D distance check
+                    if (!isChunkInRange(pos, currentCameraChunk)) {
+                        chunksToRemove.push_back(pos);
                     }
                 }
-                
-                for (const auto& pos : chunksToRemove) {
-                    removeChunk(pos);
-                    chunksUpdated = true;
-                }
             }
-            
-            // Always check for missing chunks and add them
-            for (const auto& pos : desiredChunks) {
-                if (isShuttingDown.load()) break;
-                
-                bool needsCreation = false;
-                bool isBeingGenerated = false;
-                
-                {
-                    std::lock_guard<std::mutex> lock(chunksMutex);
-                    needsCreation = chunks.find(pos) == chunks.end();
-                }
-                
-                {
-                    std::lock_guard<std::mutex> lock(chunkQueueMutex);
-                    isBeingGenerated = chunksBeingGenerated.count(pos) > 0;
-                }
-                
-                if (needsCreation && !isBeingGenerated) {
-                    addChunk(pos);
-                    chunksUpdated = true;
-                    // Small delay to prevent overwhelming the system
-                    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                }
+
+            // FIX: Actually remove the chunks
+            for (const auto& pos : chunksToRemove) {
+                removeChunk(pos);
+            }
+
+            if (!chunksToRemove.empty()) {
+                printf("Removed %zu chunks\n", chunksToRemove.size());
             }
         }
-        
+
+        // Add missing chunks
+        for (const auto& pos : desiredChunks) {
+            if (isShuttingDown.load()) break;
+
+            bool needsCreation = false;
+            bool isBeingGenerated = false;
+
+            {
+                std::lock_guard<std::mutex> lock(chunksMutex);
+                needsCreation = chunks.find(pos) == chunks.end();
+            }
+
+            {
+                std::lock_guard<std::mutex> lock(chunkQueueMutex);
+                isBeingGenerated = chunksBeingGenerated.count(pos) > 0;
+            }
+
+            if (needsCreation && !isBeingGenerated) {
+                addChunk(pos);
+            }
+        }
+
         // Check every 100ms for changes
-        //std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    
+
     printf("Chunk manager thread stopped\n");
 }
 
@@ -209,7 +204,7 @@ void World::generateChunkAsync(const glm::ivec3& pos) {
         if (removedChunks.count(pos) > 0) return;
         chunksBeingGenerated.insert(pos);
     }
-    
+
     std::thread([this, pos]() {
         if (isShuttingDown.load()) {
             std::lock_guard<std::mutex> lock(chunkQueueMutex);
@@ -237,7 +232,7 @@ void World::generateChunkAsync(const glm::ivec3& pos) {
                 chunksBeingGenerated.erase(pos);
                 return;
             }
-            
+
             auto it = chunks.find(pos);
             if (it == chunks.end()) {
                 std::lock_guard<std::mutex> qLock(chunkQueueMutex);
@@ -269,18 +264,18 @@ void World::processPendingChunks() {
     // Process multiple chunks per frame for faster loading
     int maxChunksPerFrame = 5;
     int processed = 0;
-    
+
     while (!pendingChunks.empty() && processed < maxChunksPerFrame) {
         ChunkMeshData meshData = std::move(pendingChunks.front());
         pendingChunks.pop();
-        
+
         // Release queue lock before doing expensive operations
         lock.unlock();
 
         {
             std::lock_guard<std::mutex> chunkLock(chunksMutex);
             auto it = chunks.find(meshData.position);
-            
+
             // Double-check chunk still exists and wasn't removed
             if (it != chunks.end()) {
                 bool wasRemoved = false;
@@ -288,7 +283,7 @@ void World::processPendingChunks() {
                     std::lock_guard<std::mutex> qLock(chunkQueueMutex);
                     wasRemoved = removedChunks.count(meshData.position) > 0;
                 }
-                
+
                 if (!wasRemoved) {
                     size_t meshIndex = renderer.addMesh(meshData.vertices, meshData.indices);
                     it->second.meshIndex = meshIndex;
@@ -297,7 +292,7 @@ void World::processPendingChunks() {
         }
 
         processed++;
-        
+
         // Reacquire lock for next iteration
         lock.lock();
     }
@@ -305,7 +300,7 @@ void World::processPendingChunks() {
 
 void World::render(const glm::mat4 &projection) {
     if (isShuttingDown.load()) return;
-    
+
     processPendingChunks();
     glm::mat4 view = camera.GetViewMatrix();
     renderer.render(view, projection);
@@ -315,10 +310,10 @@ void World::initialize(GLFWwindow *window) {
     isShuttingDown.store(false);
     initialLoadComplete.store(false);
     renderer.initialize(window);
-    
+
     // Initialize camera chunk position
     lastCameraChunk = worldToChunkPos(camera.position);
-    
+
     // Clear any leftover state
     {
         std::lock_guard<std::mutex> lock(chunkQueueMutex);
@@ -328,44 +323,36 @@ void World::initialize(GLFWwindow *window) {
             pendingChunks.pop();
         }
     }
-    
+
     // Start the chunk manager thread
     chunkManagerThread = std::thread([this]() {
         chunkManagerLoop();
     });
-    
-    // Wait for initial load to complete
-    //while (!initialLoadComplete.load() && !isShuttingDown.load()) {
-        //std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    //}
-    
+
     printf("World initialized with dynamic chunk loading\n");
 }
 
 void World::dispose() {
     printf("Starting world disposal\n");
-    
+
     // Signal shutdown
     isShuttingDown.store(true);
-    
+
     // Wake up chunk manager if it's waiting
     chunkManagerCV.notify_all();
-    
+
     // Wait for chunk manager thread
     if (chunkManagerThread.joinable()) {
         chunkManagerThread.join();
         printf("Chunk manager thread joined\n");
     }
-    
+
     // Wait for worker thread
     if (workerThread.joinable()) {
         workerThread.join();
         printf("Worker thread joined\n");
     }
-    
-    // Give detached threads time to finish
-    //std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    
+
     // Clean up pending chunks
     {
         std::lock_guard<std::mutex> lock(chunkQueueMutex);
@@ -375,7 +362,7 @@ void World::dispose() {
         removedChunks.clear();
         chunksBeingGenerated.clear();
     }
-    
+
     {
         std::lock_guard<std::mutex> lock(chunksMutex);
         for (auto& [pos, chunk] : chunks) {
@@ -385,16 +372,16 @@ void World::dispose() {
         }
         chunks.clear();
     }
-    
+
     renderer.compactMeshes();
     renderer.dispose();
-    
+
     printf("World disposal complete\n");
 }
 
 void World::addChunk(const glm::ivec3& pos) {
     if (isShuttingDown.load()) return;
-    
+
     // Check if chunk already exists or is being generated
     {
         std::lock_guard<std::mutex> lock(chunksMutex);
@@ -402,27 +389,27 @@ void World::addChunk(const glm::ivec3& pos) {
             return; // Chunk already exists
         }
     }
-    
+
     {
         std::lock_guard<std::mutex> lock(chunkQueueMutex);
         if (chunksBeingGenerated.count(pos) > 0) {
             return; // Already being generated
         }
     }
-    
+
     Chunk chunk;
     chunk.initialize(pos.x, pos.y, pos.z);
-    
+
     {
         std::lock_guard<std::mutex> lock(chunksMutex);
         chunks[pos] = chunk;
     }
-    
+
     {
         std::lock_guard<std::mutex> lock(chunkQueueMutex);
         removedChunks.erase(pos);
     }
-    
+
     generateChunkAsync(pos);
 }
 
@@ -431,10 +418,10 @@ void World::removeChunk(const glm::ivec3 &position) {
     {
         std::lock_guard<std::mutex> lock(chunkQueueMutex);
         removedChunks.insert(position);
-        
+
         // Remove from generation tracking
         chunksBeingGenerated.erase(position);
-        
+
         // Filter pending chunks
         std::queue<ChunkMeshData> filteredQueue;
         while (!pendingChunks.empty()) {
@@ -445,7 +432,7 @@ void World::removeChunk(const glm::ivec3 &position) {
         }
         pendingChunks = std::move(filteredQueue);
     }
-    
+
     // Remove the actual chunk
     {
         std::lock_guard<std::mutex> lock(chunksMutex);
@@ -462,10 +449,10 @@ void World::removeChunk(const glm::ivec3 &position) {
 // Optional: Manual update call if you want to force chunk updates
 void World::updateChunks() {
     if (isShuttingDown.load()) return;
-    
+
     glm::vec3 cameraPos = camera.position;
     glm::ivec3 currentCameraChunk = worldToChunkPos(cameraPos);
-    
+
     if (currentCameraChunk != lastCameraChunk) {
         lastCameraChunk = currentCameraChunk;
         // Notify chunk manager of position change
