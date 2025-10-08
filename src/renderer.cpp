@@ -41,7 +41,7 @@ void Renderer::initialize(GLFWwindow* window) {
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);           
-    glFrontFace(GL_CW);           
+    glFrontFace(GL_CCW);           
     glDepthFunc(GL_LESS);
 
     // Clean up existing resources if re-initializing
