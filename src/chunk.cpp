@@ -301,18 +301,31 @@ void Chunk::generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int
     indices.clear();
 
     const float faceVertices[6][12] = {
-        {-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f},
-        {-0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f},
-        {-0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f},
-        {-0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f},
-        {-0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f},
-        {0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f}};
+        {-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f},   // Top (+Y)
+        {-0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f}, // Bottom (-Y)
+        {-0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f},     // Front (+Z)
+        {-0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f}, // Back (-Z)
+        {-0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f}, // Left (-X)
+        {0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f}      // Right (+X)
+    };
+
+    // CCW winding order for each face when viewed from outside the cube
+    // Testing different combinations - try this first
+    const unsigned int faceIndices[6][6] = {
+        {0, 3, 2, 2, 1, 0}, // Top (+Y)
+        {0, 1, 2, 2, 3, 0}, // Bottom (-Y)
+        {0, 1, 2, 2, 3, 0}, // Front (+Z)
+        {0, 3, 2, 2, 1, 0}, // Back (-Z)
+        {0, 1, 2, 2, 3, 0}, // Left (-X)
+        {0, 3, 2, 2, 1, 0}  // Right (+X)
+    };
 
     const float texCoords[8] = {
         0.0f, 0.0f,
         1.0f, 0.0f,
         1.0f, 1.0f,
-        0.0f, 1.0f};
+        0.0f, 1.0f
+    };
 
     vertices.reserve(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE * 24);
     indices.reserve(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE * 36);
@@ -323,7 +336,6 @@ void Chunk::generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int
         {
             for (int z = 0; z < CHUNK_SIZE; ++z)
             {
-
                 if (getBlock(x, y, z) != 0)
                 {
                     for (int face = 0; face < 6; ++face)
@@ -332,6 +344,7 @@ void Chunk::generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int
                         {
                             unsigned int indexOffset = vertices.size();
 
+                            // Add 4 vertices for this face
                             for (int v = 0; v < 4; ++v)
                             {
                                 Vertex vertex;
@@ -342,18 +355,15 @@ void Chunk::generateMesh(std::vector<Vertex> &vertices, std::vector<unsigned int
                                 vertex.texCoord = glm::vec2(
                                     texCoords[v * 2],
                                     texCoords[v * 2 + 1]);
-
                                 vertex.ao = getVertexAO(x, y, z, face, v);
-
                                 vertices.push_back(vertex);
                             }
 
-                            indices.push_back(indexOffset);
-                            indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);
-                            indices.push_back(indexOffset);
+                            // Add indices with correct winding order for this face
+                            for (int i = 0; i < 6; ++i)
+                            {
+                                indices.push_back(indexOffset + faceIndices[face][i]);
+                            }
                         }
                     }
                 }
