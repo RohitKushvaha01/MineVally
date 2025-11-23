@@ -86,10 +86,10 @@ task prepareAssets() {
 			from "${projRoot}/fonts" include "*.ttf" into "${assetsFolder}/fonts"
 		}
 		copy {
-			from "${projRoot}/games" include "*.ttf" into "${assetsFolder}/games"
+			from "${projRoot}/games" into "${assetsFolder}/games"
 		}
 		copy {
-			from "${projRoot}/mods" include "*.ttf" into "${assetsFolder}/mods"
+			from "${projRoot}/mods" into "${assetsFolder}/mods"
 		}
 		copy {
 			from "${projRoot}/textures/base/pack" into "${assetsFolder}/textures/base/pack"
