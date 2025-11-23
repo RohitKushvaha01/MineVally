@@ -1,0 +1,9 @@
+# textdomain: sf_loot
+Vase=Vase
+Vase (@1)=Vase (@1)
+# short for meters
+m=m
+Toggles the vase radar which shows vases near you=Schaltet das Vasenradar um; es zeigt Vasen in Ihrer Nähe an
+No player.=Kein Spieler.
+Vase radar enabled.=Vasenradar aktiviert.
+Vase radar disabled.=Vasenradar deaktiviert.

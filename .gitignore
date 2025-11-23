@@ -57,23 +57,9 @@ AppDir
 
 ## Non-static Luanti directories or symlinks to these
 /bin/
-/games/*
-!/games/devtest/
-/games/devtest/mods/soundstuff/sounds/gitignored_sounds/*
-!/games/devtest/mods/soundstuff/sounds/gitignored_sounds/custom_sounds_here.txt
 /cache
-/textures/*
-!/textures/base/
-/screenshots
-/sounds
-/mods/*
-!/mods/mods_here.txt
 /worlds/*
 !/worlds/worlds_here.txt
-/clientmods/*
-!/clientmods/preview/
-/client/mod_storage/
-/mod_data
 
 ## Configuration/log files
 minetest.conf

@@ -1,0 +1,46 @@
+# textdomain: sf_upgrade
+Fast Walker 1=Caminante veloz
+Walking speed +5%=Velocidad al caminar +5%
+Fast Walker 2=Caminante veloz
+Fast Walker 3=Caminante veloz
+Bright Orb=Orbe brillante 
+Your light orb shines brighter=Tu orbe de luz brilla más
+Hard Light 1=Luz dura 1
+Staff of Light damage +1=Daño del bastón de luz +1
+Hard Light 2=
+Staff of Light damage +2=Daño del bastón de luz +2
+Hard Light 3=
+Staff of Light damage +3=Daño del bastón de luz +3
+Swift Staff 1=Bastón veloz
+Staff of Light fires faster=El bastón de luz dispara más rápido
+Swift Staff 2=Bastón veloz 2
+Staff of Light fires even faster=El bastón de luz dispara aún más rápido
+Swift Staff 3=Bastón veloz 3
+Staff of Light fires super-fast!=¡El bastón de luz dispara super rápido!
+Life Force 1=Fuerza de vida +1
+Max. health +2=Salud máx. +2
+Life Force 2=Fuerza de vida 2
+Life Force 3=Fuerza de vida 3
+Life Force 4=Fuerza de vida 4
+You have this upgrade.=Tienes esta mejora
+Upgrade locked.=Mejora bloqueada
+Cost:=Costo
+×@1=x@1
+In inventory: @1=En el inventario: @1
+Get=Obtener
+Upgrades=Mejoras
+Selected upgrade=Mejora seleccionada
+Remove all your upgrades=Remueve todas tus mejoras
+No player.=Ningún jugador
+All upgrades removed.=Todas las mejoras removidas.
+Get all upgrades=
+All upgrades received.=
+
+
+##### not used anymore #####
+
+Failed. You don't have enough resources!=Error. ¡No tienes suficientes recursos!
+You already have this upgrade!=¡Ya tienes esta mejora!
+You need to get the previous upgrade first!=¡Primero debes obtener la mejora previa!
+Couldn't buy this upgrade.=No se pudo comprar esta mejora.
+Hard Light=Luz dura

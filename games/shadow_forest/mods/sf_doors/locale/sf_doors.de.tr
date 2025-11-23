@@ -1,0 +1,4 @@
+# textdomain: sf_doors
+@1 (closed)=@1 (geschlossen)
+@1 (open)=@1 (offen)
+Wooden Door=Holztür

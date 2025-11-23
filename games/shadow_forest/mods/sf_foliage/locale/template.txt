@@ -1,0 +1,3 @@
+# textdomain: sf_foliage
+Tree Spawner: @1=
+Bush Spawner: @1=

@@ -1,0 +1,10 @@
+minetest.register_on_joinplayer(function(player)
+	player:set_formspec_prepend([=[
+		style_type[button,image_button,button_exit,item_image_button;sound=sf_formspec_button_click]
+		style_type[button,image_button;bgimg=sf_formspec_button.png;bgimg_middle=3;textcolor=#FFFFFF]
+		style_type[button:pressed,image_button:pressed;bgimg=sf_formspec_button_pressed.png;bgimg_middle=3;textcolor=#000000;content_offset=0]
+		style_type[button:hovered,image_button:hovered;bgimg=sf_formspec_button_hovered.png;bgimg_middle=3;textcolor=#FFFFFF]
+		background9[0,0;1,1;sf_formspec_bg.png;true;4]
+		listcolors[#90592ba0;#a64b00a0;#523626;#563e2a;#ffffff]
+	]=])
+end)

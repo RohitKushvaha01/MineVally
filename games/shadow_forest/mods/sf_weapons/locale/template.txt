@@ -1,0 +1,3 @@
+# textdomain: sf_weapons
+Dagger of Light=
+Staff of Light=

@@ -1,0 +1,13 @@
+# textdomain: sf_mobs
+Light Orb Light=Lichtkugellicht
+Bright Light Orb Light=Helles Lichtkugellicht
+Toggle the light of the light orb=Das Licht der Lichtkugel umschalten
+The light orb illuminates the environment.=Die Lichtkugel erhellt die Umgebung.
+The light orb no longer illuminates the environment.=Die Lichtkugel hat aufgehört, die Umgebung zu erhellen.
+The light of the light orb is disabled.=Das Licht der Lichtkugel ist deaktiviert.
+Crawler Spawner=Kriecherspawner
+Flyer Shooter Spawner=Fliegerschießerspawner
+Shadow Orb Spawner=Schattenkugelspawner
+Toggles the spawning of hostile mobs=Das Spawnen feindlicher Mobs umschalten
+Mob spawning enabled.=Das Spawnen von Mobs wurde aktiviert.
+Mob spawning disabled.=Das Spawnen von Mobs wurde deaktiviert.

@@ -1,0 +1,11 @@
+# textdomain: sf_resources
+((<resource name> | all) [<count>]) | list=
+Show or set your resources=
+Player does not exist.=
+All resources set!=
+Unknown resource.=
+@1: @2=
+Not a valid resource name.=
+Shadow Fragment=
+Light Crystal=
+Healing Essence=

@@ -1,0 +1,7 @@
+# textdomain: sf_world
+<destination> | spawn | respawn=<Ziel> | spawn | respawn
+Teleport to a destination=Zu einem Zielort teleportieren
+Player does not exist.=Spieler existiert nicht
+# list separator
+, =, 
+Invalid destination! Valid destinations are: @1.=Ungültiger Zielort! Gültige Zielorte sind: @1.
