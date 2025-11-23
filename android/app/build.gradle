@@ -44,7 +44,8 @@ android {
 		abi {
 			enable true
 			reset()
-			include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+			//include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+			include 'arm64-v8a'
 		}
 	}
 
@@ -83,6 +84,12 @@ task prepareAssets() {
 		}
 		copy {
 			from "${projRoot}/fonts" include "*.ttf" into "${assetsFolder}/fonts"
+		}
+		copy {
+			from "${projRoot}/games" include "*.ttf" into "${assetsFolder}/games"
+		}
+		copy {
+			from "${projRoot}/mods" include "*.ttf" into "${assetsFolder}/mods"
 		}
 		copy {
 			from "${projRoot}/textures/base/pack" into "${assetsFolder}/textures/base/pack"
