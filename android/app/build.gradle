@@ -45,7 +45,7 @@ android {
 			enable true
 			reset()
 			//include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-			include 'arm64-v8a'
+			include 'x86_64'
 		}
 	}
 
@@ -90,6 +90,9 @@ task prepareAssets() {
 		}
 		copy {
 			from "${projRoot}/mods" into "${assetsFolder}/mods"
+		}
+		copy {
+			from "${projRoot}/clientmods" into "${assetsFolder}/clientmods"
 		}
 		copy {
 			from "${projRoot}/textures/base/pack" into "${assetsFolder}/textures/base/pack"

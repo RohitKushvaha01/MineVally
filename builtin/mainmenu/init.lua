@@ -12,7 +12,7 @@ GAMEBAR_OFFSET_TOUCH = 0.15
 local menupath = core.get_mainmenu_path()
 local basepath = core.get_builtin_path()
 defaulttexturedir = core.get_texturepath_share() .. DIR_DELIM .. "base" ..
-					DIR_DELIM .. "pack" .. DIR_DELIM
+	DIR_DELIM .. "pack" .. DIR_DELIM
 
 dofile(basepath .. "common" .. DIR_DELIM .. "menu.lua")
 dofile(basepath .. "common" .. DIR_DELIM .. "filterlist.lua")
@@ -40,9 +40,9 @@ dofile(menupath .. DIR_DELIM .. "dlg_clients_list.lua")
 dofile(menupath .. DIR_DELIM .. "dlg_server_list_mods.lua")
 
 local tabs = {
-	content  = dofile(menupath .. DIR_DELIM .. "tab_content.lua"),
-	about = dofile(menupath .. DIR_DELIM .. "tab_about.lua"),
-	local_game = dofile(menupath .. DIR_DELIM .. "tab_local.lua"),
+	content     = dofile(menupath .. DIR_DELIM .. "tab_content.lua"),
+	about       = dofile(menupath .. DIR_DELIM .. "tab_about.lua"),
+	local_game  = dofile(menupath .. DIR_DELIM .. "tab_local.lua"),
 	play_online = dofile(menupath .. DIR_DELIM .. "tab_online.lua")
 }
 
@@ -79,12 +79,12 @@ local function init_globals()
 	mm_game_theme.set_engine() -- This is just a fallback.
 
 	-- Create main tabview
-	local tv_main = tabview_create("maintab", {x = MAIN_TAB_W, y = MAIN_TAB_H}, {x = 0, y = 0})
+	local tv_main = tabview_create("maintab", { x = MAIN_TAB_W, y = MAIN_TAB_H }, { x = 0, y = 0 })
 
 	tv_main:set_autosave_tab(true)
 	tv_main:add(tabs.local_game)
-	tv_main:add(tabs.play_online)
-	tv_main:add(tabs.content)
+	--tv_main:add(tabs.play_online)
+	--tv_main:add(tabs.content)
 	tv_main:add(tabs.about)
 
 	tv_main:set_global_event_handler(main_event_handler)
