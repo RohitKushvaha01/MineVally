@@ -1,0 +1,82 @@
+# textdomain: mcl_armor
+
+This is a piece of equippable armor which reduces the amount of damage you receive.=Il s'agit d'un morceau d'armure équipable qui réduit la quantité de dégâts que vous recevez.
+
+To equip it, put it on the corresponding armor slot in your inventory menu.=Pour l'équiper, placez-le sur l'emplacement d'armure correspondant dans votre menu d'inventaire.
+Sentry=
+Dune=
+Coast=
+Wild=
+Tide=
+Ward=
+Vex=
+Rib=
+Snout=
+Eye=
+Spire=
+Silence=
+Wayfinder=
+##[ api.lua ]##
+Upgrade:=
+@1 Armor Trim=
+##[ register.lua ]##
+Golden Helmet=Casque d'or
+Golden Chestplate=Plastron d'or
+Golden Leggings=Jambières d'or
+Golden Boots=Bottes d'or
+Chainmail Helmet=
+##TODO: fuzzy matched - verify and remove the comment
+Chainmail Chestplate=Cotte de mailles
+Chainmail Leggings=
+Chainmail Boots=
+Iron Helmet=Casque de fer
+Iron Chestplate=Plastron de fer
+Iron Leggings=Jambières de fer
+Iron Boots=Bottes de fer
+Diamond Helmet=Casque de diamant
+Diamond Chestplate=Plastron de diamant
+Diamond Leggings=Jambières de diamant
+Diamond Boots=Bottes de diamant
+Netherite Helmet=Casque de netherite
+Netherite Chestplate=Plastron de netherite
+Netherite Leggings=Jambières de netherite
+Netherite Boots=Bottes de netherite
+Projectile Protection=Protection contre les projectiles
+Reduces projectile damage.=Réduit les dégâts causés par les projectiles.
+Blast Protection=Protection contre les explosions
+Reduces explosion damage and knockback.=Réduit les dégâts d'explosion et de recul.
+Fire Protection=Protection contre le feu
+Reduces fire damage.=Réduit les dégats de feu.
+Protection=Protection
+Reduces most types of damage by 4% for each level.=Réduit la plupart des types de dégâts de 4% pour chaque niveau.
+Feather Falling=Chute amortie
+Reduces fall damage.=Réduit les dégats de chute.
+Aqua Affinity=Affinité aquatique
+#Translations of enchantements
+Increases underwater mining speed.=Augmente la vitesse de minage sous-marine.
+Curse of Binding=Malédiction du lien éternel
+
+Item cannot be removed from armor slots except due to death, breaking or in Creative Mode.=L'objet ne peut pas être retiré des emplacements d'armure sauf en cas de mort, de rupture ou en mode créatif.
+
+Thorns=Épines
+
+Reflects some of the damage taken when hit, at the cost of reducing durability with each proc.=Reflète une partie des dégâts subis lors de la frappe, au prix d'une réduction de la durabilité à chaque déclenchement.
+
+Elytra=Élytres
+##[ leather.lua ]##
+Leather Cap=Casquette en cuir
+Leather Tunic=Tunique en cuir
+Leather Pants=Pantalon de cuir
+Leather Boots=Bottes de cuir
+##[ trims.lua ]##
+#Translations for armor trims
+Smithing Template '@1'=Modèle à forger '@1'
+
+
+##### not used anymore #####
+
+Chain Helmet=Casque de mailles
+Chain Leggings=Jambières de mailles
+Chain Boots=Bottes de mailles
+Shooting consumes no regular arrows.=Le tir ne consomme pas de flèches standard.
+Shoot 3 arrows at the cost of one.=Tirez 3 flèches pour le prix d'une.

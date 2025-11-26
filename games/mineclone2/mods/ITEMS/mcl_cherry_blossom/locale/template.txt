@@ -1,0 +1,24 @@
+# textdomain: mcl_cherry_blossom
+##[ nodes.lua ]##
+Cherry Log=
+Cherry Bark=
+The trunk of a cherry blossom tree.=
+Stripped Cherry Log=
+Stripped Cherry Wood=
+The stripped trunk of a cherry blossom tree.=
+The stripped wood of a cherry blossom tree.=
+Cherry Wood Planks=
+Cherry Leaves=
+Cherry blossom leaves are grown from cherry blossom trees.=
+Cherry Sapling=
+Cherry blossom sapling can be planted to grow cherry trees.=
+Cherry Door=
+Cherry Trapdoor=
+Cherry Stairs=
+Cherry Slab=
+Double Cherry Slab=
+Cherry Sign=
+Cherry Fence=
+Cherry Fence Gate=
+Cherry Pressure Plate=
+Cherry Button=

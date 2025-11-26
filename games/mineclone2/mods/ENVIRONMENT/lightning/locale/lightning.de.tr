@@ -1,0 +1,11 @@
+# textdomain: lightning
+
+Let lightning strike at the specified position or player. No parameter will strike yourself.=Lass Blitze an der angegebenen Position oder dem angegebenen Spieler einschlagen. Keine Angabe und der Blitz trifft Sie selbst.
+
+
+
+##### not used anymore #####
+
+@1 was struck by lightning.=@1 wurde vom Blitz getroffen.
+Let lightning strike at the specified position or yourself=Lassen Sie einen Blitz an die gegebene Position oder auf sich selbst einschlagen.
+No position specified and unknown player=Keine Position angegeben und Spieler nicht bekannt

@@ -1,0 +1,145 @@
+License of source code
+----------------------
+
+The MIT License (MIT)
+
+Copyright (c) 2020-2023 Jean-Patrick Guerrero and contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Licenses of media (sounds)
+--------------------------
+
+Lone_Wolf (CC0):
+  i3_tab.ogg
+  i3_click.ogg
+  i3_cannot.ogg
+  i3_achievement.ogg
+  i3_heavy_armor.ogg and variations
+  i3_light_armor.ogg and variations
+  i3_skin_change.ogg
+  i3_teleport.ogg
+  i3_trash.ogg
+
+MadPanCake (CC0):
+  i3_craft.ogg (https://freesound.org/people/MadPanCake/sounds/567849/)
+
+Licenses of media (textures)
+----------------------------
+
+MightyPork (https://www.planetminecraft.com/member/mightypork), Jean-Patrick Guerrero (LGPL):
+  i3_bag_small.png
+
+eydamos (https://www.curseforge.com/members/eydamos), Jean-Patrick Guerrero (LGPL):
+  i3_bag_medium.png
+  i3_bag_large.png
+
+famfamfam (http://www.famfamfam.com/lab/icons/silk/) (CC BY 3.0):
+  i3_home_px.png
+  i3_home_px_hover.png
+
+paramat (CC BY-SA 3.0):
+  i3_arrow.png - derived from a texture by BlockMen (CC BY-SA 3.0)
+  i3_hotbar.png
+
+Paweł Kuna, wsor4035 (MIT):
+  i3_search.png
+  i3_add.png
+  i3_armor.png
+  i3_armor_hover.png
+  i3_bag.png
+  i3_bag_hover.png
+  i3_award.png
+  i3_award_hover.png
+  i3_skin.png
+  i3_skin_hover.png
+  i3_waypoint.png
+  i3_waypoint_hover.png
+  i3_trash.png
+  i3_arrow_content.png
+  i3_cancel.png
+  i3_edit.png
+  i3_compress.png
+  i3_exit.png
+  i3_fav.png
+  i3_fav_off.png
+  i3_home.png
+  i3_next.png
+  i3_next_hover.png
+  i3_non_visible.png
+  i3_refresh.png
+  i3_settings.png
+  i3_shapeless.png
+  i3_sort.png
+  i3_visible.png
+  i3_armor_5.png
+
+Paweł Kuna, Blockhead (MIT):
+  i3_all.png
+  i3_all_on.png
+  i3_find_more.png
+  i3_node.png
+  i3_node_on.png
+  i3_no_result.png
+  i3_item.png
+  i3_item_on.png
+
+Neuicons, Blockhead (MIT):
+  i3_armor_1.png
+
+Blockhead (MIT):
+  i3_armor_2.png
+  i3_armor_3.png
+  i3_armor_4.png
+
+Gambit, Jean-Patrick Guerrero - from pixelbox (CC BY-SA 3.0):
+  i3_furnace_anim.png
+  i3_mesepick.png
+  i3_steelpick.png
+  i3_fire_anim.png
+
+Jean-Patrick Guerrero (CC BY-SA 3.0):
+  i3_bar.png
+  i3_bg_content.png
+  i3_bg_full.png
+  i3_bg_goto.png
+  i3_bg_notif.png
+  i3_blank.png
+  i3_btn9.png
+  i3_btn9_hovered.png
+  i3_btn9_pressed.png
+  i3_cube.png
+  i3_highlight.png
+  i3_search_outline.png
+  i3_search_outline_trim.png
+  i3_slot.png
+  i3_tab.png
+  i3_tab_hover.png
+  i3_tab_small.png
+  i3_tab_small_hover.png
+
+SVG Repo (www.svgrepo.com), Jean-Patrick Guerrero (CC0):
+  i3_crafting.png
+
+Nekith (https://opengameart.org/users/nekith), Jean-Patrick Guerrero (CC0):
+  i3_flag_anim.png
+
+Flixberry Entertainment (https://opengameart.org/users/flixberry-entertainment), wsor4035 (CC-BY 3.0):
+i3_heart.png
+i3_heart_half.png

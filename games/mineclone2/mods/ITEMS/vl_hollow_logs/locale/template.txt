@@ -1,0 +1,22 @@
+# textdomain: vl_hollow_logs
+@1 with a Ladder=
+Hollow Oak Log=
+Stripped Hollow Oak Log=
+Hollow Acacia Log=
+Stripped Hollow Acacia Log=
+Hollow Birch Log=
+Stripped Hollow Birch Log=
+Hollow Dark Oak Log=
+Stripped Hollow Dark Oak Log=
+Hollow Jungle Log=
+Stripped Hollow Jungle Log=
+Hollow Spruce Log=
+Stripped Hollow Spruce Log=
+Hollow Cherry Log=
+Stripped Hollow Cherry Log=
+Hollow Mangrove Log=
+Stripped Hollow Mangrove Log=
+Hollow Crimson Stem=
+Stripped Hollow Crimson Stem=
+Hollow Warped Stem=
+Stripped Hollow Warped Stem=

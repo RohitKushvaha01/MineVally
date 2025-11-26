@@ -1,2 +1,0 @@
-See LICENSE_CODE.txt for the license of the software itself (source code)
-and LICENSE_MEDIA.txt for the license of the media files (images, sounds, etc.) and all other files.

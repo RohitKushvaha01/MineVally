@@ -1,0 +1,154 @@
+# textdomain: mobs_mc
+##[ axolotl.lua ]##
+Axolotl=ウーパールーパー
+##[ bat.lua ]##
+Bat=コウモリ
+##[ rabbit.lua ]##
+Rabbit=ウサギ
+Killer Bunny=殺人ウサギ
+##[ chicken.lua ]##
+Chicken=ニワトリ
+##[ cow+mooshroom.lua ]##
+Cow=ウシ
+Mooshroom=ムーシュルーム
+##[ horse.lua ]##
+Horse=ウマ
+Skeleton Horse=スケルトンホース
+Zombie Horse=ゾンビホース
+Donkey=ロバ
+Mule=ラバ
+##[ llama.lua ]##
+Llama=ラマ
+ - Strength @1=
+##[ ocelot.lua ]##
+Ocelot=ヤマネコ
+Cat=
+##[ parrot.lua ]##
+Parrot=オウム
+##[ pig.lua ]##
+Pig=ブタ
+##[ polar_bear.lua ]##
+Polar Bear=シロクマ
+##[ sheep.lua ]##
+Sheep=ヒツジ
+##[ wolf.lua ]##
+Wolf=オオカミ
+Dog=
+##[ squid.lua ]##
+Squid=イカ
+##[ villager.lua ]##
+Novice=
+Apprentice=
+Journeyman=
+Expert=
+Master=
+Unemployed=
+Farmer=農民
+Fisherman=漁師
+Fletcher=矢師
+Shepherd=羊飼い
+Librarian=司書
+Cartographer=製図家
+Armorer=防具鍛冶
+Leatherworker=革職人
+Butcher=肉屋
+Weapon Smith=武器鍛冶
+Tool Smith=道具鍛冶
+Cleric=聖職者
+Mason=
+Nitwit=求職者
+Villager=村人
+##[ pillager.lua ]##
+Pillager=ピリジャー
+##[ villager_evoker.lua ]##
+Evoker=エヴォーカー
+##[ villager_vindicator.lua ]##
+Vindicator=ヴィンディケーター
+##[ villager_zombie.lua ]##
+Zombie Villager=村人ゾンビ
+##[ witch.lua ]##
+Witch=魔女
+##[ elementals.lua ]##
+Fire Elemental=
+##[ ender_dragon.lua ]##
+Ender Dragon=エンダードラゴン
+##[ endermite.lua ]##
+Endermite=エンダーマイト
+##[ villager_illusioner.lua ]##
+Illusioner=イリュージョナー
+##[ ghast.lua ]##
+Ghast=ガスト
+##[ guardian.lua ]##
+Guardian=ガーディアン
+##[ guardian_elder.lua ]##
+Elder Guardian=エルダーガーディアン
+##[ snowman.lua ]##
+Snow Golem=スノーゴーレム
+##[ iron_golem.lua ]##
+Iron Golem=アイアンゴーレム
+##[ rover.lua ]##
+Rover=
+##[ shulker.lua ]##
+Shulker=シュルカー
+##[ silverfish.lua ]##
+Silverfish=シルバーフィッシュ
+##[ skeleton+stray.lua ]##
+Skeleton=スケルトン
+Stray=ストレイ
+##[ skeleton_wither.lua ]##
+Wither Skeleton=ウィザースケルトン
+##[ stalker.lua ]##
+Stalker=
+Overloaded Stalker=
+##[ zombie.lua ]##
+Zombie=ゾンビ
+Baby Zombie=
+Husk=ハスク
+Baby Husk=
+##[ slime+magma_cube.lua ]##
+Slime - big=
+Slime - small=
+Slime - tiny=
+Magma Cube - big=
+Magma Cube - small=
+Magma Cube - tiny=
+Magma Cube=マグマキューブ
+Slime=スライム
+##[ spider.lua ]##
+Spider=クモ
+Cave Spider=洞窟グモ
+##[ vex.lua ]##
+Vex=ヴェックス
+##[ wither.lua ]##
+Wither=ウィザー
+##[ cod.lua ]##
+Cod=タラ
+##[ salmon.lua ]##
+Salmon=サケ
+##[ tropical_fish.lua ]##
+Tropical fish=クマノミ
+##[ dolphin.lua ]##
+Dolphin=イルカ
+##[ glow_squid.lua ]##
+Glow Squid=
+##[ piglin.lua ]##
+Piglin=
+Sword Piglin=
+Zombie Piglin=ゾンビピッグマン
+Baby Zombie Piglin=
+Piglin Brute=
+##[ hoglin+zoglin.lua ]##
+Hoglin=
+Zoglin=
+Baby hoglin=
+##[ strider.lua ]##
+Strider=
+Baby Strider=
+
+
+##### not used anymore #####
+
+Blaze=ブレイズ
+Agent=エージェント
+Creeper=クリーパー
+Enderman=エンダーマン

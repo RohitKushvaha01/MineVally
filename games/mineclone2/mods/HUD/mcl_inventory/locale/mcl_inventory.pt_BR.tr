@@ -1,0 +1,31 @@
+# textdomain: mcl_inventory
+##[ creative.lua ]##
+Building Blocks=Blocos de construção
+Decoration Blocks=Blocos de decoração
+Redstone=Redstone
+Transportation=Transporte
+Miscellaneous=Diversos
+Search Items=Pesquisar Itens
+Foodstuffs=Comida
+Tools=Ferramentas
+Combat=Combate
+Mobs=Mobs
+Brewing=Fermentação
+Materials=Materiais
+Survival Inventory=Inventário do Sobrevivência
+Recipe book=Livro de receitas
+Help=Ajuda
+Advancements=Progressos
+Switch stack size=Trocar tamanho da pilha
+Select player skin=Selecionar skin do jogador
+Server Settings=
+@1 / @2=
+##[ survival.lua ]##
+Crafting=Fabricação
+Achievements=
+
+
+##### not used anymore #####
+
+Inventory=Inventário
+@1/@2=@1/@2

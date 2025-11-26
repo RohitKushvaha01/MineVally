@@ -1,2 +1,0 @@
-# textdomain: sf_particles
-Smoke Emitter=

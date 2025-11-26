@@ -1,7 +1,0 @@
-# textdomain: sf_commands
-<health>=<salud>
-Set your health points=Establece tus puntos de salud
-Not possible, damage is disabled.=No es posible, el daño está desactivado.
-Player does not exist.=No existe jugador
-Invalid health!=¡Salud inválida!
-Health set to @1.=Salud establecida a @1.

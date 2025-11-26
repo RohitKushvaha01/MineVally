@@ -1,0 +1,392 @@
+# This file contains settings of MineClone 2 that can be changed in
+# minetest.conf
+
+[World]
+# In creative mode, players are able to dig all kind of blocks
+# instantly, and have access to unlimited resources.
+# Items are not used up, and blocks do not drop.
+# Some of the functionality is only available if this setting is present
+# at startup.
+# This setting may be removed in later version in favor of
+# per-player Creative Mode.
+creative_mode (Creative mode) bool false
+
+# Fire spreads and flammable blocks might be destroyed by nearby fire.
+# Destructive fire may cause severe destruction.
+# Fire blocks will be non-destructive and stops spreading when this
+# setting is disabled, but they still deal damage to creatures.
+enable_fire (Destructive and spreading fire) bool true
+
+# If enabled, the weather will change naturally over time.
+mcl_doWeatherCycle (Change weather) bool true
+
+# Amount of rain particles. You can reduce this to get better FPS (default: 500)
+mcl_weather_rain_particles (Rain particles) int 500 0
+
+# Amount of thunderstorm rain particles. You can reduce this to get better FPS (default: 900)
+mcl_weather_thunder_particles (Thunderstorm rain particles) int 900 0
+
+# Amount of snow particles. You can reduce this to get better FPS (default: 100)
+mcl_weather_snow_particles (Snow particles) int 100 0
+
+# Amount of nether dust particles. You can reduce this to get better FPS (default: 150)
+mcl_weather_dust_particles (Nether dust particles) int 150 0
+
+# If enabled, breaking blocks will cause them to drop as item.
+# Note that blocks never have drops when in Creative Mode.
+mcl_doTileDrops (Blocks have drops) bool true
+
+# If enabled, explosions destroy blocks.
+mcl_explosions_griefing (Explosions destroy blocks) bool true
+
+# Comma separated list of disabled structure names
+mcl_disabled_structures (Disabled structures) string
+
+# Comma separated list of disabled event names
+mcl_disabled_events (Disabled events) string
+
+# Control the relative plant growth speed (default: 1)
+vl_plant_growth (Plant growth factor) float 1.0 0 100
+
+[Players]
+# If enabled, players respawn at the bed they last lay on instead of normal
+# spawn.
+# This setting is only read at startup.
+enable_bed_respawn (Respawn at bed) bool true
+
+#If enabled, players respawn at world spawn if bed is destroyed or respawn anchor has no charge.
+mcl_return_spawn (Return to spawn if no bed) bool true
+
+# How many players have to sleep to skip the night, in percent.
+# Setting to 0 will mean 1 player is always enough to skip the night. Setting above 100 will prevent skipping the night.
+# 100 by default.
+# The setting can be changed ingame using `/set mcl_playersSleepingPercentage <number>`
+mcl_playersSleepingPercentage (Players Sleeping Percentage) int 100
+
+# Normally, players drop all their items when they die. Enable this
+# setting, so players always keep their inventory on death.
+mcl_keepInventory (Keep inventory on death) bool false
+
+# Elytra maximum speed cap
+mcl_elytra_max_speed (Elytra maximum speed cap) float 4.0 2.5 6.0
+
+# Elytra rocket speed cap
+mcl_elytra_rocket_speed (Elytra rocket speed cap) float 3.5 2.0 5.5
+
+# If enabled, chat messages are shown to everyone when a player dies.
+mcl_showDeathMessages (Show death messages) bool true
+
+# If enabled, chat messages are shown to everyone when a player makes an advancement.
+mcl_showAdvancementMessages (Show advancement messages) bool true
+
+# If enabled, the recipe book will progressively be filled with new recipes that can be crafted from all items you ever have had in your inventory.
+# Recommended for new players and for a spoiler-free gameplay experience.
+# If disabled, all recipes will be shown.
+mcl_craftguide_progressive_mode	(Learn crafting recipes progressively) bool true
+
+# If disabled, the skin of all players will be character.png
+mcl_enable_skin_customization (Enable player skin customization) bool true
+
+# If enabled, players will be able to sit on stairs and slabs by right-clicking
+# them
+mcl_cozy_sit_on_stairs (Sit on stairs & slabs) bool false
+
+# If enabled, messages like "* player stands up" (in style of /me) will be sent
+# each time a player sits, lays or stands up
+mcl_cozy_print_actions (Print actions) bool false
+
+# How far the player hand can reach
+# Default:4.5
+mcl_hand_range (Hand range) float 4.5 1 128
+
+# How far the player hand can reach in creative mode
+# Default:10
+mcl_hand_range_creative (Creative mode hand range) float 10 1 128
+
+# Creative mode dig speed in seconds
+mcl_creative_dig_speed (Creative mode dig speed) float 0.2
+
+# If enabled the hunger mechanic will be active
+mcl_enable_hunger (Hunger mechanic) bool true
+
+# Enables hunger debug
+mcl_hunger_debug (Hunger debug) bool false
+
+# Health regeneration delay when hunger bar is full
+# Default: 0.5 s
+mcl_health_regen_delay (Health regen delay) float 0.5 0
+
+# Eating delay while holding right-click
+# Default: 1.61 s
+mcl_eating_delay (Eating delay) float 1.61 0
+
+[Mobs]
+# If enabled, mobs will spawn naturally. This does not affect
+# affect mob spawners.
+# This setting is only read at startup.
+mobs_spawn (Spawn mobs naturally) bool true
+
+# If enabled, only peaceful mobs will appear naturally. This does not
+# affect mob spawners.
+# This setting is only read at startup.
+only_peaceful_mobs (Spawn only peaceful mobs) bool false
+
+# Allow mobs to spawn in protected areas. This does not affect
+# mob spawners.
+mobs_spawn_protected (Mobs spawn in protected areas) bool false
+
+# Mobs difficulty. This is a number that will affect the initial and maximum
+# health and the amount of damage that mobs deal. Health and damage will
+# be multiplied with this number.
+mob_difficulty (Mob difficulty factor) float 1.0 0.0
+
+# If enabled, mobs might drop items when they die.
+mobs_drop_items (Mobs drop items) bool true
+
+# If enabled, mobs can take, place, change and destroy blocks around them.
+mobs_griefing (Mobs change blocks) bool true
+
+# If enabled, mobs won't damage particles when they got hurt.
+mobs_disable_blood (Disable mob damage particles) bool false
+
+# If enabled, some mobs (eg. villagers) will be able to open fence gates.
+mcl_mobs_open_gates (Mobs can open gates) bool false
+
+#Percentage of peaceful spawn attempts that succeed (default:30)
+mcl_mob_peaceful_percentage_spawned (Peaceful percentage success) int 30 0 100
+
+#Percentage of peaceful spawn attempts that are group spawns (default:15)
+mcl_mob_peaceful_group_percentage_spawned (Peaceful group percentage) int 15 0 100
+
+#Percentage of hostile spawn attempts that are group spawns (default:20)
+mcl_mob_hostile_group_percentage_spawned (Hostile group percentage) int 20 0 100
+
+#Maximum amount of mobs (default:500)
+mcl_mob_cap_total (Global mob cap) int 500 0 2048
+
+#Maximum amount of hostile mobs (default:300)
+mcl_mob_cap_hostile (Global hostile mob cap) int 300 0 2048
+
+#Maximum amount of non-hostile mobs (default:300)
+mcl_mob_cap_non_hostile (Global non-hostile mob cap) int 300 0 2048
+
+#Maximum amount of mobs per player (default:75)
+mcl_mob_cap_player (Mob cap per player) int 75 0 2048
+
+#Maximum amount of monsters that will spawn near a player (default:70)
+mcl_mob_cap_monster (Mob cap monsters) int 70 0 2048
+
+#Maximum amount of animals that will spawn near a player (default:10)
+mcl_mob_cap_animal (Mob cap animals) int 10 0 1024
+
+#Maximum amount of water mobs that will spawn near a player (default:8)
+mcl_mob_cap_water (Mob cap water) int 8 0 1024
+
+#Maximum amount of ambient water mobs that will spawn near a player (default:20)
+mcl_mob_cap_water_ambient (Mob cap ambient water) int 20 0 1024
+
+#Maximum amount of underground water mobs that will spawn near a player (default:5)
+mcl_mob_cap_water_underground (Mob cap underground water) int 5 0 1024
+
+#Maximum amount of axolotl mobs that will spawn near a player (default:5)
+mcl_mob_cap_axolotl (Mob cap axolotl) int 5 0 1024
+
+#Maximum amount of ambient mobs that will spawn near a player (default:15)
+mcl_mob_cap_ambient (Mob cap ambient mobs) int 15 0 1024
+
+#Maximum amount of wither bosses on the loaded mapchunks in the overworld that allows spawning withers in the overworld (default:3)
+wither_cap_overworld (Wither cap overworld) int 3 0 2048
+
+#Maximum amount of wither bosses on the loaded mapchunks in the nether that allows spawning withers in the nether (default:10)
+wither_cap_nether (Wither cap nether) int 10 0 2048
+
+#Maximum amount of wither bosses on the loaded mapchunks in the end that allows spawning withers in the end (default:5)
+wither_cap_end (Wither cap end) int 5 0 2048
+
+#Should wither follow the player who spawned him around
+wither_follow_spawner (Wither following his spawner) bool false
+
+#Should wither strafe while in combat
+wither_strafes (Wither strafes) bool true
+
+#Wither anti-troll measures (escaping when stuck in a block, despawning when spawner goes offline, teleporting after the spawner). When this is OFF, wither_follow_spawner has no effect.
+wither_anti_troll_measures (Wither anti-troll measures) bool false
+
+#Display mob icons in inventory instead of mc-like spawn eggs
+mcl_old_spawn_icons (Old spawn icons instead of eggs) bool false
+
+# How far from players should mobs stop moving
+# Larger values will have a larger performance impact (default:48)
+mcl_mob_active_range (Active mob range) int 48 0 256
+
+# Zombie siege raid (default:false)
+mcl_raids_zombie_siege (Zombie siege raid) bool false
+
+# Use MC 1.18+ light levels to control monster spawning.
+# Disable to use older mob specific light levels.
+mcl_mobs_modern_lighting (Use MC 1.18+ light rules for spawning) bool true
+
+# These only take effect if mcl_mobs_modern_lighting is enabled
+# Light levels greater than these block mobs spawning
+# See https://minecraft.fandom.com/wiki/Light#Internal_light_level
+mcl_mobs_nether_threshold (Artificial light threshold to stop spawns in the Nether) int 11 0 14
+mcl_mobs_end_threshold (Artificial light threshold to stop spawns in the End) int 0 0 14
+mcl_mobs_overworld_threshold (Artificial light threshold to stop monster spawns in the Overworld) int 0 0 14
+mcl_mobs_overworld_sky_threshold (Skylight threshold to stop monster spawns in the Overworld) int 7 0 14
+mcl_mobs_overworld_passive_threshold  (Combined light threshold to stop animal and npc spawns in the Overworld) int 7 0 14
+
+# Slime chunk ratio 1:N, default is 1 in 10, 0 to disable cave slime
+slime_ratio (Slime chunk ratio) float 10.0 0.0
+# Use 3d chunking instead of 2d chunking
+slime_3d_chunks (Slime chunk placement in 3d) bool false
+# Slime chunk maximum light for spawning, default is no limit
+slime_max_light (Maximum light level in slime chunks) int 14 0 14
+
+# Pathfinding visualization
+mcl_mobs_pathfinding_visualize (Visualize pathfinding) bool false
+
+[Audio]
+# Enable flame sound.
+flame_sound (Flame sound) bool true
+
+# Enable the in-game music.
+mcl_game_music (In-game music) bool true
+
+[Graphics]
+# How many vertical animation frames the fire texture (fire_basic_flame_animated.png) has.
+# This may vary depending on the texture pack you use.
+# Form: Image height / Image width
+fire_animation_frames (Fire Animation Frames) int 8
+
+# Whether to animate chests when open / close
+animated_chests (Animated chests) bool true
+
+# The maximum number of boss bars to simultaniously display on the screen
+max_bossbars (Maximum Boss bars) int 5
+
+# Default intensity of shadows (default: 0.33)
+mcl_default_shadow_intensity (Default shadow intensity) float 0.33 0.0 1.0
+
+# When enabled, when a player holds a bucket, a select box will be shown around liquid nodes.
+# Selecting liquid nodes on clients without a cross hair will not work correctly if this setting is disabled.
+mcl_buckets_use_select_box (Buckets use select box) bool false
+
+# Changes when Christmas decorations (e.g. on chests) are enabled.
+# 'Calendar' means from December 24th to January 7th
+vl_christmas_decorations (Christmas decorations) enum Calendar Always,Calendar,Never
+
+# Controls the behavior when the character limit on a line on a sign is reached.
+# * word_wrap: wrap at spaces and hyphens, break words if impossible
+# * word_break: break words if they reach the limit, make exceptions for spaces
+# * truncate: stop adding characters to a line past the limit, add ... instead
+mcl_signs_wrap_mode (Signs text wrapping mode) enum word_wrap word_wrap,word_break,truncate
+
+[Experimental]
+# Whether ice is translucent. If disabled, ice is fully opaque.
+#
+# Note: As of Minetest version 5.1.0, translucent ice above oceans
+# will look weird, there's a lot of flashing/blinking going on
+# due to bugs in Minetest's implementation of translucency.
+# See also: https://github.com/minetest/minetest/issues/95
+mcl_translucent_ice (Translucent ice) bool false
+
+# If enabled, the “flat” map generator generates a Classic Superflat world:
+# Completely flat, 1 layer of grass blocks on top of 2 layers of dirt on
+# top of a final layer of bedrock. No caves, trees or plants.
+# Also, if enabled, the setting “mgflat_flags” is ignored.
+# If disabled, Minetest's default flat map generator is used, that is, trees,
+# caves, and a deeper underground can be generated.
+#
+# Caution: Change this setting with care!
+# If you change this setting, then play on an existing flat world
+# that started with a different setting (e.g. you changed from superflat
+# from “enabled” to “disabled”), there will be continuity errors when players
+# reach new areas. Most importantly, the void is much higher in Superflat than
+# in “normal” Flat.
+# But creating new flat worlds after changing this setting should be safe.
+mcl_superflat_classic (Classic superflat map generation) bool false
+
+# If disabled, no deepslate will be generated.
+mcl_generate_deepslate (Generate Deepslate) bool true
+
+# If disabled, no ores will be generated.
+mcl_generate_ores (Generate Ores) bool true
+
+# If disabled, command blocks will be unusuable (but still present).
+mcl_enable_commandblocks (Enable Command Blocks) bool true
+
+# Make some blocks emit decorative particles like flames. This setting
+# specifies the detail level of particles, with higher levels being
+# more CPU demanding.
+# WARNING: This setting has quite poor performance and can slow down your
+# game by a lot.
+mcl_node_particles (Block particles detail level) enum none high,medium,low,none
+
+# Enable hard overiding of builtin commands.
+mcl_builtin_commands_overide (Enable hard overiding of builtin commands.) bool true
+
+# If enabled, this will substitute a few blocks in village schematics so they blend into normal, snowy, and sandy areas. Defaults to true.
+basic_pseudobiome_villages (Enables very basic, and experimental "pseudobiome-based" villages) bool true
+
+# If enabled, will run an LBM to fix the top 1/2 of double plants in mcimported worlds; defaults to true.
+fix_doubleplants (Mcimport double plant fixes) bool true
+
+# Allow players to create Minecraft-like maps.
+enable_real_maps (Enable Real Maps) bool true
+
+# Make maps in the Nether show not only the bedrock.
+vl_maps_allow_nether (Make maps in the Nether useful) bool true
+
+# Allow maps to overlap 50% per level
+vl_maps_allow_overlap (Allow overlapping maps by 50%) bool true
+
+# Maximum map zoom level permitted (high zoom levels can take very long, do not increase on multiplayer servers)
+vl_maps_max_zoom (Maximum map zoom level) int 3 1 5
+
+# How many times per second should handheld maps be updated
+vl_maps_update_rate (Map updates per second) int 15 1 60
+
+# Enable workarounds for faulty mob navigation.
+# Hack 1: teleport golems home if they are very far from home
+mcl_mob_allow_nav_hacks (Mob navigation hacks) bool false
+
+# Enable minecart trains
+mcl_minecarts_enable_trains (Enable minecart trains) bool true
+
+[Additional Features]
+# Enable Bookshelf inventories
+mcl_bookshelf_inventories (Enable bookshelf inventories) bool true
+
+# Enable swiftness on enchanted golden apples
+mcl_enable_fapples (Enable swiftness on enchanted golden apples) bool true
+
+# All tameable mobs listen to the "sit" rightclick like dogs
+mcl_extended_pet_control (Extended pet control) bool true
+
+# Enable hamburgers for villagers to follow
+mcl_enable_hamburger (Enable Hamburger) bool true
+
+# Starting Inventory contents (given directly to the new player)
+give_starting_inv (Player Starter Pack) bool false
+
+[Debugging]
+# If enabled, this will show the itemstring of an item in the description.
+mcl_item_id_debug (Item ID Debug) bool false
+
+#Log mob spawning and despawning events
+mcl_logging_mobs_spawn (Log Mob Spawning) bool false
+
+#Log mob movement events
+mcl_logging_mobs_movement (Log Mob Movement) bool false
+
+# If enabled mapgen timings will be dumped to log
+mcl_logging_mapgen (Chunk generation logging) bool false
+
+# If enabled generated dungeons will be logged
+mcl_logging_dungeons (Dungeons generation logging) bool false
+
+# If enabled generated structures will be logged
+mcl_logging_structures (Structure generation logging) bool false
+
+# Debug logging for mcl_events.
+mcl_logging_event_api (Debug logging for mcl_events) bool false

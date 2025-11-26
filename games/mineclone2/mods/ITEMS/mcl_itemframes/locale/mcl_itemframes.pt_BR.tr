@@ -1,0 +1,24 @@
+# textdomain: mcl_itemframes
+Item frames are decorative blocks in which items can be placed.=Molduras são blocos decorativos em que itens podem ser colocados.
+
+Just place any item on the item frame. Use the item frame again to retrieve the item.=É só colocar qualquer item na moldura. Use a moldura de novo para pegar o item de volta.
+
+##[ register.lua ]##
+Item Frame=Moldura
+Can hold an item=Consegue segurar um item
+Glow Item Frame=Moldura Brilhante
+Can hold an item and glows=Consegue segurar um item e brilha
+Invisible Item Frame=Moldura Invisivel de Item
+Can hold an item but is invisible=Consegue segurar um item, mas é invisível
+Invisible Glow Item Frame=Moldura Invisivel Brilhante
+Can hold an item and glows but is invisible=Consegue segurar um item e brilha, mas é invisível
+Glow and Behold!=Brilhe e Contemple!
+Craft a glow item frame.=Produza uma moldura brilhante.
+
+
+##### not used anymore #####
+
+Can hold an item.=Pode segurar um item.
+Can hold an item and glows.=Pode segurar um item e brilha.
+Glowing Item Frame=Moldura Brilhante
+Glowing item frames are decorative blocks in which items can be placed.=Molduras brilhantes são blocos decorativos aos quais itens podem ser posicionados.

@@ -1,7 +1,0 @@
-# textdomain: sf_world
-<destination> | spawn | respawn=
-Teleport to a destination=
-Player does not exist.=
-# list separator
-, =
-Invalid destination! Valid destinations are: @1.=

@@ -1,0 +1,30 @@
+# textdomain: mcl_blackstone
+Blackstone=
+Gilded Blackstone=
+Nether Gold Ore=
+Polished Basalt=
+Basalt=
+Smooth Basalt=
+Polished Blackstone=
+Chiseled Polished Blackstone=
+Polished Blackstone Bricks=
+Quartz Bricks=
+Soul Soil=
+Eternal Soul Fire=
+Blackstone Stairs=
+Blackstone Slab=
+Double Blackstone Slab=
+Polished Blackstone Stairs=
+Polished Blackstone Slab=
+Double Polished Blackstone Slab=
+Chiseled Polished Blackstone Stairs=
+Chiseled Polished Blackstone Slab=
+Double Chiseled Polished Blackstone Slab=
+Polished Blackstone Brick Stairs=
+Polished Blackstone Brick Slab=
+Double Polished Blackstone Brick Slab=
+Blackstone Wall=
+Soul Torch=
+
+Torches are light sources which can be placed at the side or on the top of most blocks.=
+

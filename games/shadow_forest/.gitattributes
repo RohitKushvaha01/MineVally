@@ -1,3 +1,0 @@
-# Avoid Minetest Schematic (MTS) files being considered in language stats
-# (see <https://github.com/go-enry/go-enry>)
-*.mts linguist-detectable=false

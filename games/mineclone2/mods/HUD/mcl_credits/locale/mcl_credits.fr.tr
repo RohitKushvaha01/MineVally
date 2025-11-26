@@ -1,0 +1,20 @@
+# textdomain: mcl_credits
+An open-source survival sandbox game in the spirit of Infiniminer and Minecraft=
+Sneak to skip=Shift pour passer
+Jump to speed up (additionally sprint)=Saut pour accélérer (peut être combiné avec sprint)
+##[ people.lua ]##
+Creator of MineClone=Créateur de MineClone
+Creator of VoxeLibre=Créateur de VoxeLibre
+##TODO: fuzzy matched - verify and remove the comment
+Maintainer=Mainteneurs
+Previous Maintainers=Anciens Mainteneurs
+Developers=Développeurs
+Past Developers=Anciens Développeurs
+Contributors=Contributeurs
+Music=Musique
+Original Mod Authors=Auteurs des mods originaux
+3D Models=Modèles 3D
+Textures=Textures
+Translations=Traductions
+Funders=Fondateurs
+Special thanks=Remerciements spéciaux

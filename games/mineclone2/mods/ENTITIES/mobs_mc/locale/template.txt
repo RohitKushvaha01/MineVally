@@ -1,0 +1,146 @@
+# textdomain: mobs_mc
+##[ axolotl.lua ]##
+Axolotl=
+##[ bat.lua ]##
+Bat=
+##[ rabbit.lua ]##
+Rabbit=
+Killer Bunny=
+##[ chicken.lua ]##
+Chicken=
+##[ cow+mooshroom.lua ]##
+Cow=
+Mooshroom=
+##[ horse.lua ]##
+Horse=
+Skeleton Horse=
+Zombie Horse=
+Donkey=
+Mule=
+##[ llama.lua ]##
+Llama=
+ - Strength @1=
+##[ ocelot.lua ]##
+Ocelot=
+Cat=
+##[ parrot.lua ]##
+Parrot=
+##[ pig.lua ]##
+Pig=
+##[ polar_bear.lua ]##
+Polar Bear=
+##[ sheep.lua ]##
+Sheep=
+##[ wolf.lua ]##
+Wolf=
+Dog=
+##[ squid.lua ]##
+Squid=
+##[ villager.lua ]##
+Novice=
+Apprentice=
+Journeyman=
+Expert=
+Master=
+Unemployed=
+Farmer=
+Fisherman=
+Fletcher=
+Shepherd=
+Librarian=
+Cartographer=
+Armorer=
+Leatherworker=
+Butcher=
+Weapon Smith=
+Tool Smith=
+Cleric=
+Mason=
+Nitwit=
+Villager=
+##[ pillager.lua ]##
+Pillager=
+##[ villager_evoker.lua ]##
+Evoker=
+##[ villager_vindicator.lua ]##
+Vindicator=
+##[ villager_zombie.lua ]##
+Zombie Villager=
+##[ witch.lua ]##
+Witch=
+##[ elementals.lua ]##
+Fire Elemental=
+##[ ender_dragon.lua ]##
+Ender Dragon=
+##[ endermite.lua ]##
+Endermite=
+##[ villager_illusioner.lua ]##
+Illusioner=
+##[ ghast.lua ]##
+Ghast=
+##[ guardian.lua ]##
+Guardian=
+##[ guardian_elder.lua ]##
+Elder Guardian=
+##[ snowman.lua ]##
+Snow Golem=
+##[ iron_golem.lua ]##
+Iron Golem=
+##[ rover.lua ]##
+Rover=
+##[ shulker.lua ]##
+Shulker=
+##[ silverfish.lua ]##
+Silverfish=
+##[ skeleton+stray.lua ]##
+Skeleton=
+Stray=
+##[ skeleton_wither.lua ]##
+Wither Skeleton=
+##[ stalker.lua ]##
+Stalker=
+Overloaded Stalker=
+##[ zombie.lua ]##
+Zombie=
+Baby Zombie=
+Husk=
+Baby Husk=
+##[ slime+magma_cube.lua ]##
+Slime - big=
+Slime - small=
+Slime - tiny=
+Magma Cube - big=
+Magma Cube - small=
+Magma Cube - tiny=
+Magma Cube=
+Slime=
+##[ spider.lua ]##
+Spider=
+Cave Spider=
+##[ vex.lua ]##
+Vex=
+##[ wither.lua ]##
+Wither=
+##[ cod.lua ]##
+Cod=
+##[ salmon.lua ]##
+Salmon=
+##[ tropical_fish.lua ]##
+Tropical fish=
+##[ dolphin.lua ]##
+Dolphin=
+##[ glow_squid.lua ]##
+Glow Squid=
+##[ piglin.lua ]##
+Piglin=
+Sword Piglin=
+Zombie Piglin=
+Baby Zombie Piglin=
+Piglin Brute=
+##[ hoglin+zoglin.lua ]##
+Hoglin=
+Zoglin=
+Baby hoglin=
+##[ strider.lua ]##
+Strider=
+Baby Strider=

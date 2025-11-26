@@ -1,0 +1,82 @@
+# textdomain: mcl_armor
+
+This is a piece of equippable armor which reduces the amount of damage you receive.=Esta es una pieza de armadura que se puede equipar, la cual reduce la cantidad de daño que recives.
+
+To equip it, put it on the corresponding armor slot in your inventory menu.=Para equiparla, colocala en la ranura de armadura en el menú de tu inventario.
+Sentry=Centinela
+Dune=Duna
+Coast=Costa
+Wild=Salvaje
+Tide=Mareas
+Ward=Guardián
+Vex=Vex
+Rib=Costillas
+Snout=Hocico
+Eye=Ojo
+Spire=Agujas
+Silence=Silencio
+Wayfinder=Buscacaminos
+##[ api.lua ]##
+Upgrade:=Mejora:
+@1 Armor Trim=@1 Diseño
+##[ register.lua ]##
+Golden Helmet=Casco de oro
+Golden Chestplate=Peto de oro
+Golden Leggings=Grebas de oro
+Golden Boots=Botas de oro
+Chainmail Helmet=Casco de cota de mallas
+Chainmail Chestplate=Peto de cota de mallas
+Chainmail Leggings=Grebas de cota de mallas
+Chainmail Boots=Botas de cota de mallas
+Iron Helmet=Casco de hierro
+Iron Chestplate=Peto de hierro
+Iron Leggings=Grebas de hierro
+Iron Boots=Botas de hierro
+Diamond Helmet=Casco de diamante
+Diamond Chestplate=Peto de diamante
+Diamond Leggings=Grebas de diamante
+Diamond Boots=Botas de diamante
+Netherite Helmet=Casco de netherita
+Netherite Chestplate=Peto de netherita
+Netherite Leggings=Grebas de netherita
+Netherite Boots=Botas de netherita
+Projectile Protection=Protección contra proyectiles
+Reduces projectile damage.=Reduce el daño de proyectiles.
+Blast Protection=Protección contra explosiones
+Reduces explosion damage and knockback.=Reduce el daño de explosiones y su empuje.
+Fire Protection=Protección contra el fuego
+Reduces fire damage.=Reduce el daño causado por fuego.
+Protection=Protección
+Reduces most types of damage by 4% for each level.=Reduce la mayoría de tipos de daño por 4% por cada nivel.
+Feather Falling=Caída de pluma
+Reduces fall damage.=Reduce el daño por caída.
+Aqua Affinity=Afinidad acuática
+#Translations of enchantements
+Increases underwater mining speed.=Aumenta la velocidad de minado bajo el agua.
+Curse of Binding=Maldicón de ligamiento
+
+Item cannot be removed from armor slots except due to death, breaking or in Creative Mode.=El objeto no puede ser removido de las ranuras de inventario excepto al morir, al romperse, o en Modo Creativo.
+
+Thorns=Espinas
+
+Reflects some of the damage taken when hit, at the cost of reducing durability with each proc.=Refleja una parte del daño infligido, a costa de reducir la durabilidad con cada activación.
+
+Elytra=Élitros
+##[ leather.lua ]##
+Leather Cap=Sombrero de cuero
+Leather Tunic=Túnica de cuero
+Leather Pants=Pantalones de cuero
+Leather Boots=Botas de cuero
+##[ trims.lua ]##
+#Translations for armor trims
+Smithing Template '@1'=Molde de Herrería '@1'
+
+
+##### not used anymore #####
+
+Chain Helmet=Casco de cota de mallas
+Chain Chestplate=Peto de cota de mallas
+Chain Leggings=Grebas de cota de mallas
+Chain Boots=Botas de cota de mallas
+Shooting consumes no regular arrows.=Disparar no consume flechas normales.
+Shoot 3 arrows at the cost of one.=Dispara 3 flechas por el costo de una.
